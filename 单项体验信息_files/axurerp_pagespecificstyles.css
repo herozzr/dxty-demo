@@ -1,0 +1,1658 @@
+body {
+    margin: 0px;
+}
+
+div {
+    background-repeat: no-repeat;
+}
+
+.raw_image {
+    width: 100%;
+    height: 100%;
+}
+
+.preload {
+    display: none;
+}
+#main_container {
+}
+
+.form_sketch {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.u0_normal {
+    background-image: url('../单项体验信息_files/u0_normal.png');
+}
+
+.u0_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:1275px;
+    height:24px;
+}
+
+#u0_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:1281px;
+    height:30px;
+}
+
+.u1 {
+    position:absolute;
+    left:2px;
+    top:4px;
+    width:1271px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u2_normal {
+    background-image: url('../单项体验信息_files/u2_normal.png');
+}
+
+.u2_container {
+    position:absolute;
+    left:0px;
+    top:24px;
+    width:1275px;
+    height:46px;
+}
+
+#u2_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:1281px;
+    height:52px;
+}
+
+.u3 {
+    position:absolute;
+    left:2px;
+    top:15px;
+    width:1271px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#u4 {
+    position:absolute;
+    left:0px;
+    top:70px;
+    width:1280px;
+    height:242px
+}
+
+.u5_normal {
+    background-image: url('../单项体验信息_files/u5_normal.png');
+}
+
+.u5_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:76px;
+    height:31px;
+}
+
+#u5_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:82px;
+    height:37px;
+}
+
+.u6 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:72px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u7_normal {
+    background-image: url('../单项体验信息_files/u7_normal.png');
+}
+
+.u7_container {
+    position:absolute;
+    left:76px;
+    top:0px;
+    width:87px;
+    height:31px;
+}
+
+#u7_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:93px;
+    height:37px;
+}
+
+.u8 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:83px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u9_normal {
+    background-image: url('../单项体验信息_files/u9_normal.png');
+}
+
+.u9_container {
+    position:absolute;
+    left:163px;
+    top:0px;
+    width:93px;
+    height:31px;
+}
+
+#u9_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:99px;
+    height:37px;
+}
+
+.u10 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:89px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u11_normal {
+    background-image: url('../单项体验信息_files/u11_normal.png');
+}
+
+.u11_container {
+    position:absolute;
+    left:256px;
+    top:0px;
+    width:117px;
+    height:31px;
+}
+
+#u11_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:123px;
+    height:37px;
+}
+
+.u12 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:113px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u13_normal {
+    background-image: url('../单项体验信息_files/u13_normal.png');
+}
+
+.u13_container {
+    position:absolute;
+    left:373px;
+    top:0px;
+    width:146px;
+    height:31px;
+}
+
+#u13_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:152px;
+    height:37px;
+}
+
+.u14 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:142px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u15_normal {
+    background-image: url('../单项体验信息_files/u15_normal.png');
+}
+
+.u15_container {
+    position:absolute;
+    left:518px;
+    top:0px;
+    width:114px;
+    height:31px;
+}
+
+#u15_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:120px;
+    height:37px;
+}
+
+.u16 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:110px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u17_normal {
+    background-image: url('../单项体验信息_files/u13_normal.png');
+}
+
+.u17_container {
+    position:absolute;
+    left:633px;
+    top:0px;
+    width:146px;
+    height:31px;
+}
+
+#u17_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:152px;
+    height:37px;
+}
+
+.u18 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:142px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u19_normal {
+    background-image: url('../单项体验信息_files/u19_normal.png');
+}
+
+.u19_container {
+    position:absolute;
+    left:778px;
+    top:0px;
+    width:67px;
+    height:31px;
+}
+
+#u19_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:73px;
+    height:37px;
+}
+
+.u20 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:63px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u21_normal {
+    background-image: url('../单项体验信息_files/u21_normal.png');
+}
+
+.u21_container {
+    position:absolute;
+    left:845px;
+    top:0px;
+    width:66px;
+    height:31px;
+}
+
+#u21_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:72px;
+    height:37px;
+}
+
+.u22 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:62px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u23_normal {
+    background-image: url('../单项体验信息_files/u23_normal.png');
+}
+
+.u23_container {
+    position:absolute;
+    left:911px;
+    top:0px;
+    width:59px;
+    height:31px;
+}
+
+#u23_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:65px;
+    height:37px;
+}
+
+.u24 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:55px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u25_normal {
+    background-image: url('../单项体验信息_files/u25_normal.png');
+}
+
+.u25_container {
+    position:absolute;
+    left:971px;
+    top:0px;
+    width:83px;
+    height:31px;
+}
+
+#u25_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:89px;
+    height:37px;
+}
+
+.u26 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:79px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u27_normal {
+    background-image: url('../单项体验信息_files/u27_normal.png');
+}
+
+.u27_container {
+    position:absolute;
+    left:1054px;
+    top:0px;
+    width:64px;
+    height:31px;
+}
+
+#u27_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:70px;
+    height:37px;
+}
+
+.u28 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:60px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u29_normal {
+    background-image: url('../单项体验信息_files/u29_normal.png');
+}
+
+.u29_container {
+    position:absolute;
+    left:1119px;
+    top:0px;
+    width:81px;
+    height:31px;
+}
+
+#u29_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:87px;
+    height:37px;
+}
+
+.u30 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:77px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u31_normal {
+    background-image: url('../单项体验信息_files/u31_normal.png');
+}
+
+.u31_container {
+    position:absolute;
+    left:1200px;
+    top:0px;
+    width:74px;
+    height:31px;
+}
+
+#u31_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:80px;
+    height:37px;
+}
+
+.u32 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:70px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u33_normal {
+    background-image: url('../单项体验信息_files/u33_normal.png');
+}
+
+.u33_container {
+    position:absolute;
+    left:0px;
+    top:31px;
+    width:76px;
+    height:104px;
+}
+
+#u33_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:82px;
+    height:110px;
+}
+
+.u34 {
+    position:absolute;
+    left:2px;
+    top:44px;
+    width:72px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u35_normal {
+    background-image: url('../单项体验信息_files/u35_normal.png');
+}
+
+.u35_container {
+    position:absolute;
+    left:76px;
+    top:31px;
+    width:87px;
+    height:104px;
+}
+
+#u35_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:93px;
+    height:110px;
+}
+
+.u36 {
+    position:absolute;
+    left:2px;
+    top:44px;
+    width:83px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u37_normal {
+    background-image: url('../单项体验信息_files/u37_normal.png');
+}
+
+.u37_container {
+    position:absolute;
+    left:163px;
+    top:31px;
+    width:93px;
+    height:104px;
+}
+
+#u37_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:99px;
+    height:110px;
+}
+
+.u38 {
+    position:absolute;
+    left:2px;
+    top:44px;
+    width:89px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u39_normal {
+    background-image: url('../单项体验信息_files/u39_normal.png');
+}
+
+.u39_container {
+    position:absolute;
+    left:256px;
+    top:31px;
+    width:117px;
+    height:104px;
+}
+
+#u39_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:123px;
+    height:110px;
+}
+
+.u40 {
+    position:absolute;
+    left:2px;
+    top:44px;
+    width:113px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u41_normal {
+    background-image: url('../单项体验信息_files/u41_normal.png');
+}
+
+.u41_container {
+    position:absolute;
+    left:373px;
+    top:31px;
+    width:146px;
+    height:104px;
+}
+
+#u41_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:152px;
+    height:110px;
+}
+
+.u42 {
+    position:absolute;
+    left:2px;
+    top:36px;
+    width:142px;
+    height:32px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u43_normal {
+    background-image: url('../单项体验信息_files/u43_normal.png');
+}
+
+.u43_container {
+    position:absolute;
+    left:518px;
+    top:31px;
+    width:114px;
+    height:104px;
+}
+
+#u43_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:120px;
+    height:110px;
+}
+
+.u44 {
+    position:absolute;
+    left:2px;
+    top:44px;
+    width:110px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u45_normal {
+    background-image: url('../单项体验信息_files/u41_normal.png');
+}
+
+.u45_container {
+    position:absolute;
+    left:633px;
+    top:31px;
+    width:146px;
+    height:104px;
+}
+
+#u45_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:152px;
+    height:110px;
+}
+
+.u46 {
+    position:absolute;
+    left:2px;
+    top:44px;
+    width:142px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u47_normal {
+    background-image: url('../单项体验信息_files/u47_normal.png');
+}
+
+.u47_container {
+    position:absolute;
+    left:778px;
+    top:31px;
+    width:67px;
+    height:104px;
+}
+
+#u47_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:73px;
+    height:110px;
+}
+
+.u48 {
+    position:absolute;
+    left:2px;
+    top:44px;
+    width:63px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u49_normal {
+    background-image: url('../单项体验信息_files/u49_normal.png');
+}
+
+.u49_container {
+    position:absolute;
+    left:845px;
+    top:31px;
+    width:66px;
+    height:104px;
+}
+
+#u49_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:72px;
+    height:110px;
+}
+
+.u50 {
+    position:absolute;
+    left:2px;
+    top:44px;
+    width:62px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u51_normal {
+    background-image: url('../单项体验信息_files/u51_normal.png');
+}
+
+.u51_container {
+    position:absolute;
+    left:911px;
+    top:31px;
+    width:59px;
+    height:104px;
+}
+
+#u51_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:65px;
+    height:110px;
+}
+
+.u52 {
+    position:absolute;
+    left:2px;
+    top:44px;
+    width:55px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u53_normal {
+    background-image: url('../单项体验信息_files/u53_normal.png');
+}
+
+.u53_container {
+    position:absolute;
+    left:971px;
+    top:31px;
+    width:83px;
+    height:104px;
+}
+
+#u53_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:89px;
+    height:110px;
+}
+
+.u54 {
+    position:absolute;
+    left:2px;
+    top:44px;
+    width:79px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u55_normal {
+    background-image: url('../单项体验信息_files/u55_normal.png');
+}
+
+.u55_container {
+    position:absolute;
+    left:1054px;
+    top:31px;
+    width:64px;
+    height:104px;
+}
+
+#u55_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:70px;
+    height:110px;
+}
+
+.u56 {
+    position:absolute;
+    left:2px;
+    top:44px;
+    width:60px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u57_normal {
+    background-image: url('../单项体验信息_files/u57_normal.png');
+}
+
+.u57_container {
+    position:absolute;
+    left:1119px;
+    top:31px;
+    width:81px;
+    height:104px;
+}
+
+#u57_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:87px;
+    height:110px;
+}
+
+.u58 {
+    position:absolute;
+    left:2px;
+    top:44px;
+    width:77px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u59_normal {
+    background-image: url('../单项体验信息_files/u59_normal.png');
+}
+
+.u59_container {
+    position:absolute;
+    left:1200px;
+    top:31px;
+    width:74px;
+    height:104px;
+}
+
+#u59_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:80px;
+    height:110px;
+}
+
+.u60 {
+    position:absolute;
+    left:2px;
+    top:44px;
+    width:70px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u61_normal {
+    background-image: url('../单项体验信息_files/u61_normal.png');
+}
+
+.u61_container {
+    position:absolute;
+    left:0px;
+    top:135px;
+    width:76px;
+    height:102px;
+}
+
+#u61_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:82px;
+    height:108px;
+}
+
+.u62 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:72px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u63_normal {
+    background-image: url('../单项体验信息_files/u63_normal.png');
+}
+
+.u63_container {
+    position:absolute;
+    left:76px;
+    top:135px;
+    width:87px;
+    height:102px;
+}
+
+#u63_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:93px;
+    height:108px;
+}
+
+.u64 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:83px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u65_normal {
+    background-image: url('../单项体验信息_files/u65_normal.png');
+}
+
+.u65_container {
+    position:absolute;
+    left:163px;
+    top:135px;
+    width:93px;
+    height:102px;
+}
+
+#u65_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:99px;
+    height:108px;
+}
+
+.u66 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:89px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u67_normal {
+    background-image: url('../单项体验信息_files/u67_normal.png');
+}
+
+.u67_container {
+    position:absolute;
+    left:256px;
+    top:135px;
+    width:117px;
+    height:102px;
+}
+
+#u67_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:123px;
+    height:108px;
+}
+
+.u68 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:113px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u69_normal {
+    background-image: url('../单项体验信息_files/u69_normal.png');
+}
+
+.u69_container {
+    position:absolute;
+    left:373px;
+    top:135px;
+    width:146px;
+    height:102px;
+}
+
+#u69_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:152px;
+    height:108px;
+}
+
+.u70 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:142px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u71_normal {
+    background-image: url('../单项体验信息_files/u71_normal.png');
+}
+
+.u71_container {
+    position:absolute;
+    left:518px;
+    top:135px;
+    width:114px;
+    height:102px;
+}
+
+#u71_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:120px;
+    height:108px;
+}
+
+.u72 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:110px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u73_normal {
+    background-image: url('../单项体验信息_files/u69_normal.png');
+}
+
+.u73_container {
+    position:absolute;
+    left:633px;
+    top:135px;
+    width:146px;
+    height:102px;
+}
+
+#u73_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:152px;
+    height:108px;
+}
+
+.u74 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:142px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u75_normal {
+    background-image: url('../单项体验信息_files/u75_normal.png');
+}
+
+.u75_container {
+    position:absolute;
+    left:778px;
+    top:135px;
+    width:67px;
+    height:102px;
+}
+
+#u75_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:73px;
+    height:108px;
+}
+
+.u76 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:63px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u77_normal {
+    background-image: url('../单项体验信息_files/u77_normal.png');
+}
+
+.u77_container {
+    position:absolute;
+    left:845px;
+    top:135px;
+    width:66px;
+    height:102px;
+}
+
+#u77_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:72px;
+    height:108px;
+}
+
+.u78 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:62px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u79_normal {
+    background-image: url('../单项体验信息_files/u79_normal.png');
+}
+
+.u79_container {
+    position:absolute;
+    left:911px;
+    top:135px;
+    width:59px;
+    height:102px;
+}
+
+#u79_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:65px;
+    height:108px;
+}
+
+.u80 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:55px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u81_normal {
+    background-image: url('../单项体验信息_files/u81_normal.png');
+}
+
+.u81_container {
+    position:absolute;
+    left:971px;
+    top:135px;
+    width:83px;
+    height:102px;
+}
+
+#u81_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:89px;
+    height:108px;
+}
+
+.u82 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:79px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u83_normal {
+    background-image: url('../单项体验信息_files/u83_normal.png');
+}
+
+.u83_container {
+    position:absolute;
+    left:1054px;
+    top:135px;
+    width:64px;
+    height:102px;
+}
+
+#u83_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:70px;
+    height:108px;
+}
+
+.u84 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:60px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u85_normal {
+    background-image: url('../单项体验信息_files/u85_normal.png');
+}
+
+.u85_container {
+    position:absolute;
+    left:1119px;
+    top:135px;
+    width:81px;
+    height:102px;
+}
+
+#u85_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:87px;
+    height:108px;
+}
+
+.u86 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:77px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u87_normal {
+    background-image: url('../单项体验信息_files/u87_normal.png');
+}
+
+.u87_container {
+    position:absolute;
+    left:1200px;
+    top:135px;
+    width:74px;
+    height:102px;
+}
+
+#u87_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:80px;
+    height:108px;
+}
+
+.u88 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:70px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u89_normal {
+    background-image: url('../单项体验信息_files/u89_normal.png');
+}
+
+.u89_container {
+    position:absolute;
+    left:636px;
+    top:110px;
+    width:126px;
+    height:85px;
+}
+
+#u89_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:126px;
+    height:85px;
+}
+
+.u90 {
+    position:absolute;
+    left:2px;
+    top:34px;
+    width:122px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u92 {
+    position:absolute;
+    left:16px;
+    top:0px;
+    width:12px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u93 {
+    position:absolute;
+    left:314px;
+    top:34px;
+    width:180px;
+    height:25px;
+    ;
+    ;
+    text-align: left;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u94 {
+    position:absolute;
+    left:250px;
+    top:38px;
+    width:54px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u95 {
+    position:absolute;
+    left:582px;
+    top:34px;
+    width:180px;
+    height:25px;
+    ;
+    ;
+    text-align: left;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u96 {
+    position:absolute;
+    left:518px;
+    top:38px;
+    width:54px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u97 {
+    position:absolute;
+    left:782px;
+    top:34px;
+    width:100px;
+    height:25px;
+    ;
+    ;
+    text-align: center;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+

@@ -1,0 +1,566 @@
+body {
+    margin: 0px;
+}
+
+div {
+    background-repeat: no-repeat;
+}
+
+.raw_image {
+    width: 100%;
+    height: 100%;
+}
+
+.preload {
+    display: none;
+}
+#main_container {
+}
+
+.form_sketch {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.u0_normal {
+    background-image: url('../修改价格日历_files/u0_normal.png');
+}
+
+.u0_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:674px;
+    height:457px;
+}
+
+#u0_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:680px;
+    height:463px;
+}
+
+.u1 {
+    position:absolute;
+    left:2px;
+    top:220px;
+    width:670px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u2_normal {
+    background-image: url('../修改价格日历_files/u2_normal.png');
+}
+
+.u2_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:674px;
+    height:24px;
+}
+
+#u2_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:680px;
+    height:30px;
+}
+
+.u3 {
+    position:absolute;
+    left:2px;
+    top:4px;
+    width:670px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u4 {
+    position:absolute;
+    left:197px;
+    top:34px;
+    width:315px;
+    height:25px;
+    ;
+    background-color:#CCCCCC;;
+    text-align: left;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u5_line {
+    background-image: url('../修改价格日历_files/u5_line.png');
+}
+
+.u5_line {
+    position:absolute;
+    left:0px;
+    top:4px;
+    width:674px;
+    height:3px;
+}
+
+.u5 {
+    position:absolute;
+    left:0px;
+    top:69px;
+    width:674px;
+    height:10px;
+    
+}
+
+.u6 {
+    position:absolute;
+    left:16px;
+    top:38px;
+    width:150px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u7 {
+    position:absolute;
+    left:16px;
+    top:89px;
+    width:150px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u8 {
+    position:absolute;
+    left:197px;
+    top:84px;
+    width:315px;
+    height:25px;
+    ;
+    background-color:#CCCCCC;;
+    text-align: left;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u9_line {
+    background-image: url('../修改价格日历_files/u9_line.png');
+}
+
+.u9_line {
+    position:absolute;
+    left:0px;
+    top:4px;
+    width:674px;
+    height:3px;
+}
+
+.u9 {
+    position:absolute;
+    left:0px;
+    top:121px;
+    width:674px;
+    height:10px;
+    
+}
+
+.u10 {
+    position:absolute;
+    left:16px;
+    top:141px;
+    width:150px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u11 {
+    position:absolute;
+    left:197px;
+    top:136px;
+    width:315px;
+    height:25px;
+    ;
+    background-color:#CCCCCC;;
+    text-align: left;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u12_line {
+    background-image: url('../修改价格日历_files/u12_line.png');
+}
+
+.u12_line {
+    position:absolute;
+    left:0px;
+    top:4px;
+    width:674px;
+    height:3px;
+}
+
+.u12 {
+    position:absolute;
+    left:0px;
+    top:171px;
+    width:674px;
+    height:10px;
+    
+}
+
+.u13_line {
+    background-image: url('../修改价格日历_files/u13_line.png');
+}
+
+.u13_line {
+    position:absolute;
+    left:0px;
+    top:4px;
+    width:674px;
+    height:3px;
+}
+
+.u13 {
+    position:absolute;
+    left:0px;
+    top:256px;
+    width:674px;
+    height:10px;
+    
+}
+
+.u14 {
+    position:absolute;
+    left:197px;
+    top:417px;
+    width:64px;
+    height:25px;
+    ;
+    ;
+    text-align: center;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u15 {
+    position:absolute;
+    left:285px;
+    top:417px;
+    width:64px;
+    height:25px;
+    ;
+    ;
+    text-align: center;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u16 {
+    position:absolute;
+    left:16px;
+    top:281px;
+    width:150px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u17 {
+    position:absolute;
+    left:197px;
+    top:276px;
+    width:180px;
+    height:25px;
+    ;
+    background-color:#CCCCCC;;
+    text-align: left;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u18_line {
+    background-image: url('../修改价格日历_files/u18_line.png');
+}
+
+.u18_line {
+    position:absolute;
+    left:0px;
+    top:4px;
+    width:674px;
+    height:3px;
+}
+
+.u18 {
+    position:absolute;
+    left:0px;
+    top:307px;
+    width:674px;
+    height:10px;
+    
+}
+
+.u19 {
+    position:absolute;
+    left:16px;
+    top:190px;
+    width:150px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u20 {
+    position:absolute;
+    left:197px;
+    top:185px;
+    width:180px;
+    height:25px;
+    ;
+    ;
+    text-align: left;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u21_line {
+    background-image: url('../修改价格日历_files/u21_line.png');
+}
+
+.u21_line {
+    position:absolute;
+    left:0px;
+    top:4px;
+    width:674px;
+    height:3px;
+}
+
+.u21 {
+    position:absolute;
+    left:0px;
+    top:216px;
+    width:674px;
+    height:10px;
+    
+}
+
+.u22 {
+    position:absolute;
+    left:16px;
+    top:233px;
+    width:150px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u23 {
+    position:absolute;
+    left:197px;
+    top:228px;
+    width:180px;
+    height:25px;
+    ;
+    ;
+    text-align: left;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u24 {
+    position:absolute;
+    left:16px;
+    top:326px;
+    width:150px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u25 {
+    position:absolute;
+    left:197px;
+    top:321px;
+    width:180px;
+    height:25px;
+    ;
+    background-color:#CCCCCC;;
+    text-align: left;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u26_line {
+    background-image: url('../修改价格日历_files/u26_line.png');
+}
+
+.u26_line {
+    position:absolute;
+    left:0px;
+    top:4px;
+    width:674px;
+    height:3px;
+}
+
+.u26 {
+    position:absolute;
+    left:0px;
+    top:352px;
+    width:674px;
+    height:10px;
+    
+}
+
+.u27 {
+    position:absolute;
+    left:16px;
+    top:371px;
+    width:150px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u28 {
+    position:absolute;
+    left:197px;
+    top:366px;
+    width:180px;
+    height:25px;
+    ;
+    background-color:#CCCCCC;;
+    text-align: left;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u29_line {
+    background-image: url('../修改价格日历_files/u29_line.png');
+}
+
+.u29_line {
+    position:absolute;
+    left:0px;
+    top:4px;
+    width:674px;
+    height:3px;
+}
+
+.u29 {
+    position:absolute;
+    left:0px;
+    top:397px;
+    width:674px;
+    height:10px;
+    
+}
+
+.u30 {
+    position:absolute;
+    left:387px;
+    top:233px;
+    width:150px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
