@@ -3624,10 +3624,6 @@ pre[class*="language-"] {
 </tbody></table>
 <h6 id="2请求-7">（2）请求</h6>
 <p>无请求体。传 <code>{}</code>。</p>
-<p><strong>请求字段说明</strong>：无。</p>
-<blockquote>
-<p><strong>变更说明</strong>：相比 V1.1，去掉 <code>cartIds</code> 参数（购物车即数据源，已确认 C4）。</p>
-</blockquote>
 <h6 id="3返回-6">（3）返回</h6>
 <pre><code class="language-json"><span class="token punctuation">{</span>
   <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
@@ -4182,13 +4178,6 @@ pre[class*="language-"] {
 <td><code>false</code>（默认）=试算；<code>true</code>=执行退款</td>
 </tr>
 </tbody></table>
-<p><strong>⚠️ 相比 V1.1 文档的改动</strong>：</p>
-<ul>
-<li><p>加 <code>confirm</code> 参数（两步退款，你已确认 P1=B）</p>
-</li>
-<li><p>参数从 1 个变 2 个，改用 <code>ParaTyOrderRefund</code> <strong>裸值</strong>（不再是 <code>SingleString</code> + <code>{Value:...}</code>）</p>
-</li>
-</ul>
 <h6 id="3返回-10">（3）返回</h6>
 <p><strong>第一步（试算，<code>confirm=false</code>）</strong>：</p>
 <pre><code class="language-json"><span class="token punctuation">{</span>
@@ -4398,43 +4387,35 @@ pre[class*="language-"] {
 <table>
 <thead>
 <tr>
-<th></th>
 <th>项</th>
 <th>值</th>
 </tr>
 </thead>
 <tbody><tr>
-<td></td>
 <td>路径</td>
 <td><code>/api/v1/z_Ty/verify</code></td>
 </tr>
 <tr>
-<td></td>
 <td>方法</td>
 <td>POST</td>
 </tr>
 <tr>
-<td></td>
 <td>鉴权</td>
 <td><code>[UserAuthorize]</code>（<strong>暂不做角色判断</strong>，C11 待定）</td>
 </tr>
 <tr>
-<td></td>
 <td>参数</td>
 <td><code>ParaTyQrcodeVerify { string Qrcode; bool Confirm; }</code></td>
 </tr>
 <tr>
-<td></td>
 <td>companyType</td>
 <td>从 <code>CurrEntrance</code> 推导</td>
 </tr>
 <tr>
-<td></td>
 <td>SP</td>
 <td><code>Proc_Ty_Qrcode_Verify</code></td>
 </tr>
 <tr>
-<td></td>
 <td>说明</td>
 <td>两步核销：同一接口，<code>confirm</code> 区分"预校验"和"真核销"</td>
 </tr>
