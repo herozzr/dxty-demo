@@ -2696,1736 +2696,1225 @@ pre[class*="language-"] {
   <style>pre.front-matter{display:none!important;}.markdown-body{}</style>
 </head>
 <body>
-  <article class="markdown-body"><h2 id="六接口设计">六、接口设计</h2>
-<p>所有接口统一使用 <code>/api/v1/z_Ty/</code> 前缀。</p>
-<h3 id="61-用户端接口">6.1 用户端接口</h3>
+  <article class="markdown-body"><h3 id="50-数据表汇总">5.0 数据表汇总</h3>
 <table>
 <thead>
 <tr>
-<th>接口</th>
-<th>方法</th>
-<th>用途</th>
+<th>#</th>
+<th>表名</th>
+<th>中文名</th>
+<th>类型</th>
+<th>主键</th>
+<th>带 companyType</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>/api/v1/z_Ty/getInfo</code></td>
-<td>POST</td>
-<td>获取单项体验信息（入口卡片 + 顶部介绍）</td>
+<td>1</td>
+<td><code>ty_info_data</code></td>
+<td>单项体验信息表</td>
+<td>主表</td>
+<td><code>tyInfoId</code></td>
+<td>✅</td>
+<td>模块文案（标题/副标题/badge/logo/封面/最低价/上下架），全局唯一（按 <code>moduleCode</code>）</td>
 </tr>
 <tr>
-<td><code>/api/v1/z_Ty/getItemListPage</code></td>
-<td>POST</td>
-<td>按日期获取全部类别及各类别下可用项目</td>
+<td>2</td>
+<td><code>ty_item_category_data</code></td>
+<td>单项体验类别表</td>
+<td>主表</td>
+<td><code>tyItemCategoryId</code></td>
+<td>✅</td>
+<td>类别名 + 排序 + 启用，入口卡片标签、列表页左侧菜单</td>
 </tr>
 <tr>
-<td><code>/api/v1/z_Ty/getItemDetail</code></td>
-<td>POST</td>
-<td>获取项目详情</td>
+<td>3</td>
+<td><code>ty_item_data</code></td>
+<td>单项体验项目表</td>
+<td>主表</td>
+<td><code>tyItemId</code></td>
+<td>✅</td>
+<td>项目基础信息 + 详情区块 + 媒体 + 价格 + 上下架，详情页两种类型（活动/住宿）</td>
 </tr>
 <tr>
-<td><code>/api/v1/z_Ty/addCart</code></td>
-<td>POST</td>
-<td>加入购物车</td>
+<td>4</td>
+<td><code>ty_item_calendar_data</code></td>
+<td>单项体验项目价格日历表</td>
+<td>主表</td>
+<td><code>tyItemCalendarId</code></td>
+<td>✅</td>
+<td><strong>库存核心表</strong>：按「项目 × 日期」存 <code>price</code> / <code>stock</code> / <code>sold</code> / <code>lockStock</code></td>
 </tr>
 <tr>
-<td><strong><code>/api/v1/z_Ty/updateCart</code></strong></td>
-<td>POST</td>
-<td><strong>修改购物车数量</strong></td>
+<td>5</td>
+<td><code>ty_tag_data</code></td>
+<td>单项体验标签汇总表</td>
+<td>子表</td>
+<td><code>tyTagId</code></td>
+<td>❌</td>
+<td>按 <code>tyItemId</code> 存标签（小标签/体验流程/房型信息/设施服务/购买须知/入住须知）</td>
 </tr>
 <tr>
-<td><strong><code>/api/v1/z_Ty/deleteCart</code></strong></td>
-<td>POST</td>
-<td><strong>删除购物车项（支持批量）</strong></td>
+<td>6</td>
+<td><code>ty_refund_rule_data</code></td>
+<td>单项体验退改规则表</td>
+<td>子表</td>
+<td><code>tyRefundRuleId</code></td>
+<td>❌</td>
+<td>按 <code>tyItemId</code> 存退改规则（提前天数 + 退款比例 + 说明）</td>
 </tr>
 <tr>
-<td><code>/api/v1/z_Ty/getCart</code></td>
-<td>POST</td>
-<td><strong>查看购物车汇总（数量 + 金额）</strong></td>
+<td>7</td>
+<td><code>ty_cart_data</code></td>
+<td>单项体验购物车表</td>
+<td>主表</td>
+<td><code>tyCartId</code></td>
+<td>✅</td>
+<td>按 <code>(userId, tyItemId)</code> 唯一，日期取最新，数量累加</td>
 </tr>
 <tr>
-<td><code>/api/v1/z_Ty/confirmOrder</code></td>
-<td>POST</td>
-<td>确认订单页数据</td>
+<td>8</td>
+<td><code>ty_order_data</code></td>
+<td>单项体验订单表</td>
+<td>主表</td>
+<td><code>tyOrderId</code></td>
+<td>✅</td>
+<td>订单主表：订单号 + 联系人 + 人数 + 总额 + 支付/订单状态 + 超时时间</td>
 </tr>
 <tr>
-<td><code>/api/v1/z_Ty/createOrder</code></td>
-<td>POST</td>
-<td>创建订单（预占库存）</td>
+<td>9</td>
+<td><code>ty_order_item_data</code></td>
+<td>单项体验订单明细表</td>
+<td>子表</td>
+<td><code>tyOrderItemId</code></td>
+<td>❌</td>
+<td>订单明细：项目名快照 + 预约日期 + 数量 + 单价快照</td>
 </tr>
 <tr>
-<td><code>/api/v1/z_Ty/pay</code></td>
-<td>POST</td>
-<td>支付（预占转已售）</td>
-</tr>
-<tr>
-<td><code>/api/v1/z_Ty/cancelOrder</code></td>
-<td>POST</td>
-<td>取消订单（释放预占）</td>
-</tr>
-<tr>
-<td><code>/api/v1/z_Ty/refund</code></td>
-<td>POST</td>
-<td><strong>退款（两步：试算 + 确认）</strong></td>
-</tr>
-<tr>
-<td><code>/api/v1/z_Ty/generateQrcode</code></td>
-<td>POST</td>
-<td>生成核销二维码</td>
-</tr>
-<tr>
-<td><code>/api/v1/z_Ty/verify</code></td>
-<td>POST</td>
-<td><strong>工作人员核销（两步：预校验 + 确认核销）</strong></td>
+<td>10</td>
+<td><code>ty_qrcode_data</code></td>
+<td>单项体验服务二维码表</td>
+<td>子表</td>
+<td><code>tyQrcodeId</code></td>
+<td>❌</td>
+<td>核销码：10 位随机码 + 失效时间 + 是否使用/作废</td>
 </tr>
 </tbody></table>
-<h4 id="631-用户端接口示例">6.3.1 用户端接口示例</h4>
-<h5 id="getinfo-获取单项体验信息">getInfo — 获取单项体验信息</h5>
-<h6 id="1接口定义">（1）接口定义</h6>
-<table>
-<thead>
-<tr>
-<th>项</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>路径</td>
-<td><code>/api/v1/z_Ty/getInfo</code></td>
-</tr>
-<tr>
-<td>方法</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>鉴权</td>
-<td><code>[AllowAnonymous]</code></td>
-</tr>
-<tr>
-<td>参数</td>
-<td>无</td>
-</tr>
-</tbody></table>
-<h6 id="2请求">（2）请求</h6>
-<p>无请求体。传 <code>{}</code>。</p>
-<p><strong>请求字段说明</strong>：无。</p>
-<h6 id="3返回">（3）返回</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"entry"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token property">"logoImage"</span><span class="token operator">:</span> <span class="token string">"https://.../logo.png"</span><span class="token punctuation">,</span>
-      <span class="token property">"coverImage"</span><span class="token operator">:</span> <span class="token string">"https://.../cover.jpg"</span><span class="token punctuation">,</span>
-      <span class="token property">"badgeText"</span><span class="token operator">:</span> <span class="token string">"马胖村在地体验店"</span><span class="token punctuation">,</span>
-      <span class="token property">"title"</span><span class="token operator">:</span> <span class="token string">"马胖村单项体验"</span><span class="token punctuation">,</span>
-      <span class="token property">"subtitle"</span><span class="token operator">:</span> <span class="token string">"吃住玩一站集齐 · 地道村寨体验随心选"</span><span class="token punctuation">,</span>
-      <span class="token property">"tags"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"侗家风味"</span><span class="token punctuation">,</span> <span class="token string">"山野好宿"</span><span class="token punctuation">,</span> <span class="token string">"非遗手作"</span><span class="token punctuation">,</span> <span class="token string">"茶园野趣"</span><span class="token punctuation">,</span> <span class="token string">"更多村寨玩法"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-      <span class="token property">"footerText"</span><span class="token operator">:</span> <span class="token string">"17项体验全年可选"</span><span class="token punctuation">,</span>
-      <span class="token property">"minPrice"</span><span class="token operator">:</span> <span class="token number">30.00</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token property">"header"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token property">"logoImage"</span><span class="token operator">:</span> <span class="token string">"https://.../logo.png"</span><span class="token punctuation">,</span>
-      <span class="token property">"title"</span><span class="token operator">:</span> <span class="token string">"马胖村单项体验"</span><span class="token punctuation">,</span>
-      <span class="token property">"subtitle"</span><span class="token operator">:</span> <span class="token string">"吃住玩一站集齐 · 地道村寨体验随心选"</span><span class="token punctuation">,</span>
-      <span class="token property">"tags"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"17项地道体验"</span><span class="token punctuation">,</span> <span class="token string">"全年随心出发"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-      <span class="token property">"totalCount"</span><span class="token operator">:</span> <span class="token number">17</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>返回字段说明</strong>：</p>
+<p><strong>说明</strong>：</p>
+<ul>
+<li><p><strong>带 <code>companyType</code></strong>：主表（信息 / 类别 / 项目 / 日历 / 购物车 / 订单），用于多公司隔离。</p>
+</li>
+<li><p><strong>不带 <code>companyType</code></strong>：子表（标签 / 退改规则 / 订单明细 / 二维码），通过关联主表的 <code>companyType</code> 过滤。</p>
+</li>
+</ul>
+<h3 id="51-单项体验信息表ty_info_data">5.1 单项体验信息表（ty_info_data）</h3>
 <table>
 <thead>
 <tr>
 <th>字段</th>
 <th>类型</th>
+<th>默认值</th>
 <th>说明</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>entry.logoImage</td>
-<td>string</td>
-<td>列表页头部图标</td>
+<td>tyInfoId</td>
+<td>int identity</td>
+<td>—</td>
+<td>主键</td>
+<td>1</td>
 </tr>
 <tr>
-<td>entry.coverImage</td>
-<td>string</td>
-<td>入口卡片封面图</td>
+<td>moduleCode</td>
+<td>varchar(50)</td>
+<td>''</td>
+<td>代码</td>
+<td>MPCDXTY</td>
 </tr>
 <tr>
-<td>entry.badgeText</td>
-<td>string</td>
-<td>封面图 badge</td>
-</tr>
-<tr>
-<td>entry.title</td>
-<td>string</td>
+<td>title</td>
+<td>nvarchar(128)</td>
+<td>''</td>
 <td>主标题</td>
+<td>马胖村单项体验</td>
 </tr>
 <tr>
-<td>entry.subtitle</td>
-<td>string</td>
+<td>subtitle</td>
+<td>nvarchar(512)</td>
+<td>''</td>
 <td>副标题</td>
+<td>吃住玩一站集齐 · 地道村寨体验随心选</td>
 </tr>
 <tr>
-<td>entry.tags</td>
-<td>string[]</td>
-<td>类别前 5 个 name</td>
+<td>badgeText</td>
+<td>nvarchar(128)</td>
+<td>''</td>
+<td>封面图左上角标签</td>
+<td>马胖村在地体验店</td>
 </tr>
 <tr>
-<td>entry.footerText</td>
-<td>string</td>
-<td>上架项目总数 + <code>"项体验全年可选"</code></td>
+<td>coverImage</td>
+<td>varchar(500)</td>
+<td>''</td>
+<td>入口卡片封面图</td>
+<td>—</td>
 </tr>
 <tr>
-<td>entry.minPrice</td>
-<td>decimal</td>
-<td>最低展示价</td>
+<td>logoImage</td>
+<td>varchar(500)</td>
+<td>''</td>
+<td>列表页头部图标</td>
+<td>—</td>
 </tr>
 <tr>
-<td>header.logoImage</td>
-<td>string</td>
-<td>同 entry.logoImage</td>
+<td>minPrice</td>
+<td>decimal(18,2)</td>
+<td>0</td>
+<td>最低展示价（为 0 则动态计算）</td>
+<td>30.00</td>
 </tr>
 <tr>
-<td>header.title</td>
-<td>string</td>
-<td>同 entry.title</td>
+<td>isOnline</td>
+<td>bit</td>
+<td>1</td>
+<td>是否上架</td>
+<td>1</td>
 </tr>
 <tr>
-<td>header.subtitle</td>
-<td>string</td>
-<td>同 entry.subtitle</td>
+<td>companyType</td>
+<td>smallint</td>
+<td>0</td>
+<td>公司类型</td>
+<td>0</td>
 </tr>
 <tr>
-<td>header.tags</td>
-<td>string[]</td>
-<td><code>["{N}项地道体验", "全年随心出发"]</code></td>
+<td>addTime</td>
+<td>datetime</td>
+<td>GETDATE()</td>
+<td>创建时间</td>
+<td>—</td>
 </tr>
 <tr>
-<td>header.totalCount</td>
+<td>addUserId</td>
 <td>int</td>
-<td>上架项目总数</td>
+<td>0</td>
+<td>创建人ID</td>
+<td>—</td>
+</tr>
+<tr>
+<td>updateTime</td>
+<td>datetime</td>
+<td>NULL</td>
+<td>修改时间</td>
+<td>—</td>
+</tr>
+<tr>
+<td>updateUserId</td>
+<td>int</td>
+<td>NULL</td>
+<td>修改人ID</td>
+<td>—</td>
 </tr>
 </tbody></table>
-<hr>
-<h5 id="getitemlistpage-获取项目列表页类别-项目合并">getItemListPage — 获取项目列表页（类别 + 项目合并）</h5>
-<h6 id="1接口定义-1">（1）接口定义</h6>
-<table>
-<thead>
-<tr>
-<th>项</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>路径</td>
-<td><code>/api/v1/z_Ty/getItemListPage</code></td>
-</tr>
-<tr>
-<td>方法</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>鉴权</td>
-<td><code>[AllowAnonymous]</code></td>
-</tr>
-<tr>
-<td>参数</td>
-<td><code>SingleString</code>（日期）</td>
-</tr>
-</tbody></table>
-<h6 id="2请求-1">（2）请求</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"date"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"Value"</span><span class="token operator">:</span> <span class="token string">"2026-08-20"</span> <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>请求字段说明</strong>：</p>
+<p><strong>唯一索引</strong>：<code>UX_ty_info_data_moduleCode (moduleCode)</code></p>
+<h3 id="52-单项体验类别表ty_item_category_data">5.2 单项体验类别表（ty_item_category_data）</h3>
 <table>
 <thead>
 <tr>
 <th>字段</th>
 <th>类型</th>
-<th>必填</th>
+<th>默认值</th>
 <th>说明</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>date</td>
-<td>object</td>
-<td>是</td>
-<td>预约日期，格式 <code>{ "Value": "yyyy-MM-dd" }</code></td>
+<td>tyItemCategoryId</td>
+<td>int identity</td>
+<td>—</td>
+<td>主键</td>
+<td>1</td>
+</tr>
+<tr>
+<td>name</td>
+<td>nvarchar(64)</td>
+<td>''</td>
+<td>类别名称</td>
+<td>侗家风味</td>
+</tr>
+<tr>
+<td>orderSeq</td>
+<td>int</td>
+<td>0</td>
+<td>排序</td>
+<td>1</td>
+</tr>
+<tr>
+<td>isEnabled</td>
+<td>bit</td>
+<td>1</td>
+<td>是否启用</td>
+<td>1</td>
+</tr>
+<tr>
+<td>companyType</td>
+<td>smallint</td>
+<td>0</td>
+<td>公司类型</td>
+<td>0</td>
+</tr>
+<tr>
+<td>addTime</td>
+<td>datetime</td>
+<td>GETDATE()</td>
+<td>创建时间</td>
+<td>—</td>
+</tr>
+<tr>
+<td>addUserId</td>
+<td>int</td>
+<td>0</td>
+<td>创建人ID</td>
+<td>—</td>
+</tr>
+<tr>
+<td>updateTime</td>
+<td>datetime</td>
+<td>NULL</td>
+<td>修改时间</td>
+<td>—</td>
+</tr>
+<tr>
+<td>updateUserId</td>
+<td>int</td>
+<td>NULL</td>
+<td>修改人ID</td>
+<td>—</td>
 </tr>
 </tbody></table>
-<h6 id="3返回-1">（3）返回</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
-  <span class="token property">"list"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-    <span class="token punctuation">{</span>
-      <span class="token property">"categoryId"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-      <span class="token property">"categoryName"</span><span class="token operator">:</span> <span class="token string">"侗家风味"</span><span class="token punctuation">,</span>
-      <span class="token property">"items"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        <span class="token punctuation">{</span>
-          <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-          <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"茶禾定制家宴"</span><span class="token punctuation">,</span>
-          <span class="token property">"summary"</span><span class="token operator">:</span> <span class="token string">"约1.5小时·随时随玩"</span><span class="token punctuation">,</span>
-          <span class="token property">"coverImage"</span><span class="token operator">:</span> <span class="token string">"https://.../cover.jpg"</span><span class="token punctuation">,</span>
-          <span class="token property">"price"</span><span class="token operator">:</span> <span class="token number">80.00</span><span class="token punctuation">,</span>
-          <span class="token property">"priceUnit"</span><span class="token operator">:</span> <span class="token string">"人"</span><span class="token punctuation">,</span>
-          <span class="token property">"availableStock"</span><span class="token operator">:</span> <span class="token number">19</span>
-        <span class="token punctuation">}</span>
-      <span class="token punctuation">]</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">{</span>
-      <span class="token property">"categoryId"</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
-      <span class="token property">"categoryName"</span><span class="token operator">:</span> <span class="token string">"茶园野趣"</span><span class="token punctuation">,</span>
-      <span class="token property">"items"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">]</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>返回字段说明</strong>：</p>
+<h3 id="53-单项体验项目表ty_item_data">5.3 单项体验项目表（ty_item_data）</h3>
 <table>
 <thead>
 <tr>
 <th>字段</th>
 <th>类型</th>
+<th>默认值</th>
 <th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>list[].categoryId</td>
-<td>int</td>
-<td>类别Id</td>
-</tr>
-<tr>
-<td>list[].categoryName</td>
-<td>string</td>
-<td>类别名</td>
-</tr>
-<tr>
-<td>list[].items</td>
-<td>array</td>
-<td>该类别下当日可用项目（可空数组）</td>
-</tr>
-<tr>
-<td>list[].items[].id</td>
-<td>int</td>
-<td>项目Id</td>
-</tr>
-<tr>
-<td>list[].items[].name</td>
-<td>string</td>
-<td>项目名</td>
-</tr>
-<tr>
-<td>list[].items[].summary</td>
-<td>string</td>
-<td>列表页副标题</td>
-</tr>
-<tr>
-<td>list[].items[].coverImage</td>
-<td>string</td>
-<td>列表页封面图</td>
-</tr>
-<tr>
-<td>list[].items[].price</td>
-<td>decimal</td>
-<td>当日单价</td>
-</tr>
-<tr>
-<td>list[].items[].priceUnit</td>
-<td>string</td>
-<td>价格单位</td>
-</tr>
-<tr>
-<td>list[].items[].availableStock</td>
-<td>int</td>
-<td>可售余量</td>
-</tr>
-</tbody></table>
-<hr>
-<h5 id="getitemdetail-获取项目详情">getItemDetail — 获取项目详情</h5>
-<h6 id="1接口定义-2">（1）接口定义</h6>
-<table>
-<thead>
-<tr>
-<th>项</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>路径</td>
-<td><code>/api/v1/z_Ty/getItemDetail</code></td>
-</tr>
-<tr>
-<td>方法</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>鉴权</td>
-<td><code>[AllowAnonymous]</code></td>
-</tr>
-<tr>
-<td>参数</td>
-<td><code>ParaTyItemDetail { int TyItemId; string Date; }</code></td>
-</tr>
-</tbody></table>
-<h6 id="2请求-2">（2）请求</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"tyItemId"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"date"</span><span class="token operator">:</span> <span class="token string">"2026-08-20"</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>请求字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>必填</th>
-<th>说明</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>tyItemId</td>
+<td>int identity</td>
+<td>—</td>
+<td>主键</td>
+<td>1</td>
+</tr>
+<tr>
+<td>tyItemCategoryId</td>
 <td>int</td>
-<td>是</td>
-<td>项目Id</td>
-</tr>
-<tr>
-<td>date</td>
-<td>string</td>
-<td>是</td>
-<td>预约日期（<code>yyyy-MM-dd</code>）</td>
-</tr>
-</tbody></table>
-<h6 id="3返回活动类-detailtype0">（3）返回（活动类 detailType=0）</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-    <span class="token property">"categoryName"</span><span class="token operator">:</span> <span class="token string">"侗家风味"</span><span class="token punctuation">,</span>
-    <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"茶禾定制家宴"</span><span class="token punctuation">,</span>
-    <span class="token property">"detailSubtitle"</span><span class="token operator">:</span> <span class="token string">"当季食材做成的一桌侗乡家宴"</span><span class="token punctuation">,</span>
-    <span class="token property">"detailType"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-    <span class="token property">"detailVideoUrl"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-    <span class="token property">"detailImageUrl"</span><span class="token operator">:</span> <span class="token string">"https://.../detail.jpg"</span><span class="token punctuation">,</span>
-    <span class="token property">"coverImage"</span><span class="token operator">:</span> <span class="token string">"https://.../cover.jpg"</span><span class="token punctuation">,</span>
-    <span class="token property">"basePrice"</span><span class="token operator">:</span> <span class="token number">80.00</span><span class="token punctuation">,</span>
-    <span class="token property">"priceUnit"</span><span class="token operator">:</span> <span class="token string">"人"</span><span class="token punctuation">,</span>
-    <span class="token property">"minPeople"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-    <span class="token property">"maxPeople"</span><span class="token operator">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
-    <span class="token property">"contentTitle"</span><span class="token operator">:</span> <span class="token string">"餐饮内容"</span><span class="token punctuation">,</span>
-    <span class="token property">"contentBody"</span><span class="token operator">:</span> <span class="token string">"当季食材做成的一席侗乡家宴。由村民按当季食材准备，具体菜品会随季节调整。"</span><span class="token punctuation">,</span>
-    <span class="token property">"availableStock"</span><span class="token operator">:</span> <span class="token number">19</span><span class="token punctuation">,</span>
-    <span class="token property">"tags"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"约1.5小时"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">""</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"当地食材"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">""</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"到店核销"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">""</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"到店签到"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">"出示订单二维码"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"老师带领"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">"讲解并完成体验"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"体验结束"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">"确认项目完成"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"至少提前1天购买并确认用餐人数"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">""</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"如有儿童、过敏或饮食忌口，请备注"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">""</span> <span class="token punctuation">}</span>
-    <span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token property">"refundRules"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token punctuation">{</span> <span class="token property">"daysBefore"</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token property">"refundRatio"</span><span class="token operator">:</span> <span class="token number">100.00</span><span class="token punctuation">,</span> <span class="token property">"daysBeforeRemark"</span><span class="token operator">:</span> <span class="token string">"提前10天以上"</span><span class="token punctuation">,</span> <span class="token property">"refundRatioRemark"</span><span class="token operator">:</span> <span class="token string">"可取消并全额退款"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"daysBefore"</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token property">"refundRatio"</span><span class="token operator">:</span> <span class="token number">88.00</span><span class="token punctuation">,</span> <span class="token property">"daysBeforeRemark"</span><span class="token operator">:</span> <span class="token string">"提前10天至5天"</span><span class="token punctuation">,</span> <span class="token property">"refundRatioRemark"</span><span class="token operator">:</span> <span class="token string">"退订单总额的88%"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"daysBefore"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token property">"refundRatio"</span><span class="token operator">:</span> <span class="token number">76.00</span><span class="token punctuation">,</span> <span class="token property">"daysBeforeRemark"</span><span class="token operator">:</span> <span class="token string">"提前4天至1天"</span><span class="token punctuation">,</span> <span class="token property">"refundRatioRemark"</span><span class="token operator">:</span> <span class="token string">"退订单总额的76%"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"daysBefore"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token property">"refundRatio"</span><span class="token operator">:</span> <span class="token number">64.00</span><span class="token punctuation">,</span> <span class="token property">"daysBeforeRemark"</span><span class="token operator">:</span> <span class="token string">"活动当天"</span><span class="token punctuation">,</span> <span class="token property">"refundRatioRemark"</span><span class="token operator">:</span> <span class="token string">"退订单总额的64%"</span> <span class="token punctuation">}</span>
-    <span class="token punctuation">]</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><h6 id="3返回住宿类-detailtype1仅差异字段">（3）返回（住宿类 detailType=1，仅差异字段）</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
-    <span class="token property">"categoryName"</span><span class="token operator">:</span> <span class="token string">"山野好宿"</span><span class="token punctuation">,</span>
-    <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"小木屋·1.8米床"</span><span class="token punctuation">,</span>
-    <span class="token property">"detailType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-    <span class="token property">"priceUnit"</span><span class="token operator">:</span> <span class="token string">"间/晚"</span><span class="token punctuation">,</span>
-    <span class="token property">"contentTitle"</span><span class="token operator">:</span> <span class="token string">"房型信息"</span><span class="token punctuation">,</span>
-    <span class="token property">"contentBody"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-    <span class="token property">"tags"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"约18㎡"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">""</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"1张1.8米大床"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">""</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">13</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"可申请续住"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">""</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"建筑面积"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">"约18㎡"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">15</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"床型/入住"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">"1张1.8米大床"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"独立卫浴"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">""</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">21</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"房价以购物车结算时选择的日期为准"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">""</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token property">"tagType"</span><span class="token operator">:</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"入住当日14:00后办理，离店日12:00前退房"</span><span class="token punctuation">,</span> <span class="token property">"tagRemark"</span><span class="token operator">:</span> <span class="token string">""</span> <span class="token punctuation">}</span>
-    <span class="token punctuation">]</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>返回字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>id</td>
-<td>int</td>
-<td>项目Id</td>
-</tr>
-<tr>
-<td>categoryName</td>
-<td>string</td>
-<td>类别名</td>
+<td>0</td>
+<td>所属类别 → ty_item_category</td>
+<td>1</td>
 </tr>
 <tr>
 <td>name</td>
-<td>string</td>
-<td>项目名</td>
+<td>nvarchar(128)</td>
+<td>''</td>
+<td>项目名称</td>
+<td>茶禾定制家宴</td>
 </tr>
 <tr>
-<td>detailSubtitle</td>
-<td>string</td>
-<td>详情页副标题</td>
-</tr>
-<tr>
-<td>detailType</td>
-<td>int</td>
-<td>0=活动类 / 1=住宿类</td>
-</tr>
-<tr>
-<td>detailVideoUrl</td>
-<td>string</td>
-<td>详情页视频（优先）</td>
-</tr>
-<tr>
-<td>detailImageUrl</td>
-<td>string</td>
-<td>详情页图片</td>
+<td>summary</td>
+<td>nvarchar(256)</td>
+<td>''</td>
+<td>列表页副标题</td>
+<td>约1.5小时·随时随玩</td>
 </tr>
 <tr>
 <td>coverImage</td>
-<td>string</td>
-<td>列表页封面图（兜底）</td>
+<td>varchar(500)</td>
+<td>''</td>
+<td>列表页封面图</td>
+<td>必有</td>
+</tr>
+<tr>
+<td>detailSubtitle</td>
+<td>nvarchar(256)</td>
+<td>''</td>
+<td>详情页副标题</td>
+<td>当季食材做成的一桌侗乡家宴</td>
+</tr>
+<tr>
+<td>detailType</td>
+<td>smallint</td>
+<td>0</td>
+<td>详情页类型</td>
+<td>0=活动类, 1=住宿类</td>
+</tr>
+<tr>
+<td>detailImageUrl</td>
+<td>varchar(500)</td>
+<td>''</td>
+<td>详情页图片地址（为空则用 coverImage）</td>
+<td>大图URL</td>
+</tr>
+<tr>
+<td>detailVideoUrl</td>
+<td>varchar(500)</td>
+<td>''</td>
+<td>详情页视频地址（为空则用图片）</td>
+<td>视频URL</td>
 </tr>
 <tr>
 <td>basePrice</td>
-<td>decimal</td>
+<td>decimal(18,2)</td>
+<td>0</td>
 <td>基础价格</td>
+<td>80.00</td>
 </tr>
 <tr>
 <td>priceUnit</td>
-<td>string</td>
+<td>nvarchar(16)</td>
+<td>''</td>
 <td>价格单位</td>
+<td>人 / 晚 / 项目</td>
 </tr>
 <tr>
 <td>minPeople</td>
 <td>int</td>
+<td>1</td>
 <td>最低起订人数</td>
+<td>1</td>
 </tr>
 <tr>
 <td>maxPeople</td>
 <td>int</td>
+<td>0</td>
 <td>最高人数（0不限）</td>
+<td>20</td>
+</tr>
+<tr>
+<td>isOnline</td>
+<td>bit</td>
+<td>1</td>
+<td>是否上架</td>
+<td>1</td>
+</tr>
+<tr>
+<td>orderSeq</td>
+<td>int</td>
+<td>0</td>
+<td>排序</td>
+<td>1</td>
 </tr>
 <tr>
 <td>contentTitle</td>
-<td>string</td>
-<td>内容区块标题（住宿类="房型信息"）</td>
+<td>nvarchar(64)</td>
+<td>''</td>
+<td>详情区块标题</td>
+<td>餐饮内容 / 房型信息</td>
 </tr>
 <tr>
 <td>contentBody</td>
-<td>string</td>
-<td>内容区块正文（<strong>住宿类留空</strong>）</td>
+<td>nvarchar(max)</td>
+<td>''</td>
+<td>详情区块正文</td>
+<td>当季食材做成的一桌侗乡家宴…</td>
 </tr>
 <tr>
-<td>availableStock</td>
+<td>companyType</td>
+<td>smallint</td>
+<td>0</td>
+<td>公司类型</td>
+<td>0</td>
+</tr>
+<tr>
+<td>addTime</td>
+<td>datetime</td>
+<td>GETDATE()</td>
+<td>创建时间</td>
+<td>—</td>
+</tr>
+<tr>
+<td>addUserId</td>
 <td>int</td>
-<td>可售余量</td>
+<td>0</td>
+<td>创建人ID</td>
+<td>—</td>
 </tr>
 <tr>
-<td>tags</td>
-<td>array</td>
-<td>全部标签（含 tagType）</td>
+<td>updateTime</td>
+<td>datetime</td>
+<td>NULL</td>
+<td>修改时间</td>
+<td>—</td>
 </tr>
 <tr>
-<td>tags[].tagType</td>
+<td>updateUserId</td>
 <td>int</td>
-<td>1=小标签 / 2=体验流程 / 3=房型信息 / 4=设施服务 / 5=购买(预订)须知 / 6=入住须知</td>
-</tr>
-<tr>
-<td>refundRules</td>
-<td>array</td>
-<td>退改规则（<code>daysBefore DESC</code>）</td>
+<td>NULL</td>
+<td>修改人ID</td>
+<td>—</td>
 </tr>
 </tbody></table>
-<hr>
-<h5 id="addcart-加入购物车">addCart — 加入购物车</h5>
-<h6 id="1接口定义-3">（1）接口定义</h6>
+<p><strong>索引</strong>：<code>IX_ty_item_data_tyItemCategoryId (tyItemCategoryId)</code></p>
+<p><strong>媒体字段说明</strong>（渲染优先级：detailVideoUrl &gt; detailImageUrl &gt; coverImage）：</p>
 <table>
 <thead>
 <tr>
-<th>项</th>
-<th>值</th>
+<th>场景</th>
+<th>coverImage</th>
+<th>detailImageUrl</th>
+<th>detailVideoUrl</th>
+<th>前端渲染</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>路径</td>
-<td><code>/api/v1/z_Ty/addCart</code></td>
+<td>只有封面图</td>
+<td>有值</td>
+<td>''</td>
+<td>''</td>
+<td>用 coverImage</td>
 </tr>
 <tr>
-<td>方法</td>
-<td>POST</td>
+<td>详情用图片</td>
+<td>有值</td>
+<td>大图URL</td>
+<td>''</td>
+<td>用 detailImageUrl</td>
 </tr>
 <tr>
-<td>鉴权</td>
-<td><code>[UserAuthorize]</code></td>
-</tr>
-<tr>
-<td>参数</td>
-<td><code>ParaTyCartAdd { int TyItemId; string Date; int Quantity; }</code></td>
+<td>详情用视频</td>
+<td>有值</td>
+<td>（可空）</td>
+<td>视频URL</td>
+<td>用 detailVideoUrl</td>
 </tr>
 </tbody></table>
-<h6 id="2请求-3">（2）请求</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"tyItemId"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"date"</span><span class="token operator">:</span> <span class="token string">"2026-08-20"</span><span class="token punctuation">,</span>
-  <span class="token property">"quantity"</span><span class="token operator">:</span> <span class="token number">1</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>请求字段说明</strong>：</p>
+<p><strong>contentTitle 按 detailType 区分</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>detailType</th>
+<th>contentTitle 示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0=活动类</td>
+<td>餐饮内容 / 体验内容 / 项目内容</td>
+<td>家宴=餐饮内容，手作/田园=体验内容，公益=项目内容</td>
+</tr>
+<tr>
+<td>1=住宿类</td>
+<td>房型信息</td>
+<td>住宿类=房型信息</td>
+</tr>
+</tbody></table>
+<h3 id="54-单项体验项目价格日历表ty_item_calendar_data-库存核心表">5.4 单项体验项目价格日历表（ty_item_calendar_data）— 库存核心表</h3>
 <table>
 <thead>
 <tr>
 <th>字段</th>
 <th>类型</th>
-<th>必填</th>
+<th>默认值</th>
 <th>说明</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
+<td>tyItemCalendarId</td>
+<td>int identity</td>
+<td>—</td>
+<td>主键</td>
+<td>1</td>
+</tr>
+<tr>
 <td>tyItemId</td>
 <td>int</td>
-<td>是</td>
-<td>项目Id</td>
+<td>0</td>
+<td>项目ID</td>
+<td>1</td>
 </tr>
 <tr>
 <td>date</td>
-<td>string</td>
-<td>是</td>
-<td>预约日期（<code>yyyy-MM-dd</code>）</td>
+<td>date</td>
+<td>—</td>
+<td>日期</td>
+<td>2026-08-20</td>
 </tr>
 <tr>
-<td>quantity</td>
+<td>price</td>
+<td>decimal(18,3)</td>
+<td>0</td>
+<td>当日单价</td>
+<td>80.000</td>
+</tr>
+<tr>
+<td>stock</td>
 <td>int</td>
-<td>是</td>
-<td>数量（&gt;0）</td>
+<td>0</td>
+<td>当日总库存</td>
+<td>30</td>
+</tr>
+<tr>
+<td>sold</td>
+<td>int</td>
+<td>0</td>
+<td>当日已售数量</td>
+<td>8</td>
+</tr>
+<tr>
+<td>lockStock</td>
+<td>int</td>
+<td>0</td>
+<td>当日预占数量</td>
+<td>3</td>
+</tr>
+<tr>
+<td>isEnabled</td>
+<td>bit</td>
+<td>1</td>
+<td>是否启用</td>
+<td>1</td>
+</tr>
+<tr>
+<td>companyType</td>
+<td>smallint</td>
+<td>0</td>
+<td>公司类型</td>
+<td>0</td>
+</tr>
+<tr>
+<td>addTime</td>
+<td>datetime</td>
+<td>GETDATE()</td>
+<td>创建时间</td>
+<td>—</td>
+</tr>
+<tr>
+<td>addUserId</td>
+<td>int</td>
+<td>0</td>
+<td>创建人ID</td>
+<td>—</td>
+</tr>
+<tr>
+<td>updateTime</td>
+<td>datetime</td>
+<td>NULL</td>
+<td>修改时间</td>
+<td>—</td>
+</tr>
+<tr>
+<td>updateUserId</td>
+<td>int</td>
+<td>NULL</td>
+<td>修改人ID</td>
+<td>—</td>
 </tr>
 </tbody></table>
-<h6 id="3返回-2">（3）返回</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"cartCount"</span><span class="token operator">:</span> <span class="token number">7</span><span class="token punctuation">,</span>
-    <span class="token property">"cartTotalAmount"</span><span class="token operator">:</span> <span class="token number">1160.00</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>返回字段说明</strong>：</p>
+<p><strong>唯一索引</strong>：<code>UX_ty_item_calendar_data_tyItemId_date (tyItemId, date)</code>
+<strong>可售余量</strong>：<code>stock - sold - lockStock</code></p>
+<h3 id="55-单项体验标签汇总表ty_tag_data">5.5 单项体验标签汇总表（ty_tag_data）</h3>
 <table>
 <thead>
 <tr>
 <th>字段</th>
 <th>类型</th>
+<th>默认值</th>
 <th>说明</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>cartCount</td>
+<td>tyTagId</td>
+<td>int identity</td>
+<td>—</td>
+<td>主键</td>
+<td>1</td>
+</tr>
+<tr>
+<td>tyItemId</td>
 <td>int</td>
-<td>购物车总数量</td>
+<td>0</td>
+<td>外键 → ty_item</td>
+<td>1</td>
 </tr>
 <tr>
-<td>cartTotalAmount</td>
-<td>decimal</td>
-<td>购物车总金额（按当日历价）</td>
+<td>tagType</td>
+<td>smallint</td>
+<td>0</td>
+<td>标签类型</td>
+<td>1=小标签, 2=体验流程, 3=房型信息, 4=设施服务, 5=购买/预订须知, 6=入住须知</td>
+</tr>
+<tr>
+<td>tagName</td>
+<td>nvarchar(128)</td>
+<td>''</td>
+<td>标签名称</td>
+<td>到店签到</td>
+</tr>
+<tr>
+<td>tagRemark</td>
+<td>nvarchar(256)</td>
+<td>''</td>
+<td>标签说明（可选，如体验流程的补充说明）</td>
+<td>出示订单二维码</td>
+</tr>
+<tr>
+<td>orderSeq</td>
+<td>int</td>
+<td>0</td>
+<td>排序号</td>
+<td>1</td>
 </tr>
 </tbody></table>
-<hr>
-<h5 id="updatecart-修改购物车数量">updateCart — 修改购物车数量</h5>
-<h6 id="1接口定义-4">（1）接口定义</h6>
-<table>
-<thead>
-<tr>
-<th>项</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>路径</td>
-<td><code>/api/v1/z_Ty/updateCart</code></td>
-</tr>
-<tr>
-<td>方法</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>鉴权</td>
-<td><code>[UserAuthorize]</code></td>
-</tr>
-<tr>
-<td>参数</td>
-<td><code>ParaTyCartUpdate { int TyCartId; int Quantity; }</code></td>
-</tr>
-</tbody></table>
-<h6 id="2请求-4">（2）请求</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"tyCartId"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"quantity"</span><span class="token operator">:</span> <span class="token number">3</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>请求字段说明</strong>：</p>
+<p><strong>索引</strong>：<code>IX_ty_tag_data_tyItemId_tagType (tyItemId, tagType)</code></p>
+<p><strong>tagType 说明</strong>：</p>
+<ul>
+<li><code>1=小标签</code>：存到tagName字段，如"约1.5小时""当地食材"​</li>
+<li><code>2=体验流程</code>：存到tagName和tagRemark两个字段，如tagName=​​"到店签到"、tagRemark="出示订单二维码"</li>
+<li><code>3=房型信息</code>：存到tagName和tagRemark两个字段，如tagName="建筑面积"、tagRemark="约18㎡"</li>
+<li><code>4=设施服务</code>：存到tagName字段，如"独立卫浴""空调""WiFi"</li>
+<li><code>5=购买/预订须知</code>：存到tagName字段，活动类前端显示为"购买须知"，住宿类前端显示为"预订须知"</li>
+<li><code>6=入住须知</code>：存到tagName字段</li>
+</ul>
+<h3 id="56-单项体验退改规则表ty_refund_rule_data">5.6 单项体验退改规则表（ty_refund_rule_data）</h3>
 <table>
 <thead>
 <tr>
 <th>字段</th>
 <th>类型</th>
-<th>必填</th>
+<th>默认值</th>
 <th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>tyRefundRuleId</td>
+<td>int identity</td>
+<td>—</td>
+<td>主键</td>
+<td>1</td>
+</tr>
+<tr>
+<td>tyItemId</td>
+<td>int</td>
+<td>0</td>
+<td>外键 → ty_item</td>
+<td>1</td>
+</tr>
+<tr>
+<td>daysBefore</td>
+<td>int</td>
+<td>0</td>
+<td>提前天数（含）</td>
+<td>10</td>
+</tr>
+<tr>
+<td>refundRatio</td>
+<td>decimal(5,2)</td>
+<td>0</td>
+<td>退款比例（百分比）</td>
+<td>100.00</td>
+</tr>
+<tr>
+<td>daysBeforeRemark</td>
+<td>nvarchar(64)</td>
+<td>''</td>
+<td>提前天数说明</td>
+<td>提前10天以上</td>
+</tr>
+<tr>
+<td>refundRatioRemark</td>
+<td>nvarchar(128)</td>
+<td>''</td>
+<td>退款比例说明</td>
+<td>可取消并全额退款</td>
+</tr>
+<tr>
+<td>orderSeq</td>
+<td>int</td>
+<td>0</td>
+<td>排序号</td>
+<td>1</td>
+</tr>
+<tr>
+<td>addTime</td>
+<td>datetime</td>
+<td>GETDATE()</td>
+<td>创建时间</td>
+<td>—</td>
+</tr>
+<tr>
+<td>addUserId</td>
+<td>int</td>
+<td>0</td>
+<td>创建人ID</td>
+<td>—</td>
+</tr>
+<tr>
+<td>updateTime</td>
+<td>datetime</td>
+<td>NULL</td>
+<td>修改时间</td>
+<td>—</td>
+</tr>
+<tr>
+<td>updateUserId</td>
+<td>int</td>
+<td>NULL</td>
+<td>修改人ID</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<p><strong>索引</strong>：<code>IX_ty_refund_rule_data_tyItemId (tyItemId)</code></p>
+<p><strong>退款计算规则</strong>：退款时按订单的 <code>tyItemId</code> 查询单项体验退改规则表，根据当前距体验日期的天数匹配 <code>daysBefore</code> 最大的规则，退款金额 = <code>订单总额 × refundRatio / 100</code>。</p>
+<p><strong>示例数据</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>tyItemId</th>
+<th>daysBefore</th>
+<th>refundRatio</th>
+<th>daysBeforeRemark</th>
+<th>refundRatioRemark</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>10</td>
+<td>100.00</td>
+<td>提前10天以上</td>
+<td>可取消并全额退款</td>
+</tr>
+<tr>
+<td>1</td>
+<td>5</td>
+<td>88.00</td>
+<td>提前10天至5天</td>
+<td>退订单总额的88%</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>76.00</td>
+<td>提前4天至1天</td>
+<td>退订单总额的76%</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>64.00</td>
+<td>活动当天</td>
+<td>退订单总额的64%</td>
+</tr>
+</tbody></table>
+<h3 id="57-单项体验购物车表ty_cart_data">5.7 单项体验购物车表（ty_cart_data）</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>tyCartId</td>
+<td>int identity</td>
+<td>—</td>
+<td>主键</td>
+<td>1</td>
+</tr>
+<tr>
+<td>userId</td>
 <td>int</td>
-<td>是</td>
-<td>购物车项Id</td>
+<td>0</td>
+<td>用户ID</td>
+<td>1001</td>
+</tr>
+<tr>
+<td>tyItemId</td>
+<td>int</td>
+<td>0</td>
+<td>项目ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td>date</td>
+<td>date</td>
+<td>—</td>
+<td>预约日期</td>
+<td>2026-08-20</td>
 </tr>
 <tr>
 <td>quantity</td>
 <td>int</td>
-<td>是</td>
-<td>新数量（&gt;0）</td>
-</tr>
-</tbody></table>
-<h6 id="3返回-3">（3）返回</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"cartCount"</span><span class="token operator">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
-    <span class="token property">"cartTotalAmount"</span><span class="token operator">:</span> <span class="token number">1320.00</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>返回字段说明</strong>：同 <code>addCart</code>。</p>
-<hr>
-<h5 id="deletecart-删除购物车项">deleteCart — 删除购物车项</h5>
-<h6 id="1接口定义-5">（1）接口定义</h6>
-<table>
-<thead>
-<tr>
-<th>项</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>路径</td>
-<td><code>/api/v1/z_Ty/deleteCart</code></td>
-</tr>
-<tr>
-<td>方法</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>鉴权</td>
-<td><code>[UserAuthorize]</code></td>
-</tr>
-<tr>
-<td>参数</td>
-<td><code>SingleString</code>（购物车项Id列表，逗号分隔）</td>
-</tr>
-</tbody></table>
-<h6 id="2请求-5">（2）请求</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"tyCartIds"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"Value"</span><span class="token operator">:</span> <span class="token string">"1,2"</span> <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>请求字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>必填</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>tyCartIds</td>
-<td>object</td>
-<td>是</td>
-<td>购物车项Id列表，格式 <code>{ "Value": "1,2" }</code></td>
-</tr>
-</tbody></table>
-<h6 id="3返回-4">（3）返回</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"cartCount"</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
-    <span class="token property">"cartTotalAmount"</span><span class="token operator">:</span> <span class="token number">580.00</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>返回字段说明</strong>：同 <code>addCart</code>。</p>
-<hr>
-<h5 id="getcart-查看购物车汇总">getCart — 查看购物车汇总</h5>
-<h6 id="1接口定义-6">（1）接口定义</h6>
-<table>
-<thead>
-<tr>
-<th>项</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>路径</td>
-<td><code>/api/v1/z_Ty/getCart</code></td>
-</tr>
-<tr>
-<td>方法</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>鉴权</td>
-<td><code>[UserAuthorize]</code></td>
-</tr>
-<tr>
-<td>参数</td>
-<td>无</td>
-</tr>
-<tr>
-<td>说明</td>
-<td>用于 App 重开、切页后恢复购物车角标</td>
-</tr>
-</tbody></table>
-<h6 id="2请求-6">（2）请求</h6>
-<p>无请求体。传 <code>{}</code>。</p>
-<p><strong>请求字段说明</strong>：无。</p>
-<h6 id="3返回-5">（3）返回</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"cartCount"</span><span class="token operator">:</span> <span class="token number">7</span><span class="token punctuation">,</span>
-    <span class="token property">"cartTotalAmount"</span><span class="token operator">:</span> <span class="token number">1160.00</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>返回字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>cartCount</td>
-<td>int</td>
-<td>购物车总数量</td>
-</tr>
-<tr>
-<td>cartTotalAmount</td>
-<td>decimal</td>
-<td>购物车总金额（按当日历价）</td>
-</tr>
-</tbody></table>
-<hr>
-<h5 id="confirmorder-确认订单页数据">confirmOrder — 确认订单页数据</h5>
-<h6 id="1接口定义-7">（1）接口定义</h6>
-<table>
-<thead>
-<tr>
-<th>项</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>路径</td>
-<td><code>/api/v1/z_Ty/confirmOrder</code></td>
-</tr>
-<tr>
-<td>方法</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>鉴权</td>
-<td><code>[UserAuthorize]</code></td>
-</tr>
-<tr>
-<td>参数</td>
-<td>无（购物车即数据源）</td>
-</tr>
-</tbody></table>
-<h6 id="2请求-7">（2）请求</h6>
-<p>无请求体。传 <code>{}</code>。</p>
-<p><strong>请求字段说明</strong>：无。</p>
-<h6 id="3返回-6">（3）返回</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"date"</span><span class="token operator">:</span> <span class="token string">"2026-08-20"</span><span class="token punctuation">,</span>
-    <span class="token property">"canSubmit"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    <span class="token property">"items"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token punctuation">{</span>
-        <span class="token property">"cartId"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-        <span class="token property">"itemId"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-        <span class="token property">"itemName"</span><span class="token operator">:</span> <span class="token string">"茶禾定制家宴"</span><span class="token punctuation">,</span>
-        <span class="token property">"coverImage"</span><span class="token operator">:</span> <span class="token string">"https://.../cover.jpg"</span><span class="token punctuation">,</span>
-        <span class="token property">"date"</span><span class="token operator">:</span> <span class="token string">"2026-08-20"</span><span class="token punctuation">,</span>
-        <span class="token property">"quantity"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-        <span class="token property">"unitPrice"</span><span class="token operator">:</span> <span class="token number">80.00</span><span class="token punctuation">,</span>
-        <span class="token property">"priceUnit"</span><span class="token operator">:</span> <span class="token string">"人"</span><span class="token punctuation">,</span>
-        <span class="token property">"subtotal"</span><span class="token operator">:</span> <span class="token number">80.00</span><span class="token punctuation">,</span>
-        <span class="token property">"availableStock"</span><span class="token operator">:</span> <span class="token number">19</span><span class="token punctuation">,</span>
-        <span class="token property">"canBook"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-        <span class="token property">"minPeople"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-        <span class="token property">"maxPeople"</span><span class="token operator">:</span> <span class="token number">20</span>
-      <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span>
-        <span class="token property">"cartId"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
-        <span class="token property">"itemId"</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
-        <span class="token property">"itemName"</span><span class="token operator">:</span> <span class="token string">"芦笙百家宴"</span><span class="token punctuation">,</span>
-        <span class="token property">"coverImage"</span><span class="token operator">:</span> <span class="token string">"https://.../cover2.jpg"</span><span class="token punctuation">,</span>
-        <span class="token property">"date"</span><span class="token operator">:</span> <span class="token string">"2026-08-20"</span><span class="token punctuation">,</span>
-        <span class="token property">"quantity"</span><span class="token operator">:</span> <span class="token number">6</span><span class="token punctuation">,</span>
-        <span class="token property">"unitPrice"</span><span class="token operator">:</span> <span class="token number">180.00</span><span class="token punctuation">,</span>
-        <span class="token property">"priceUnit"</span><span class="token operator">:</span> <span class="token string">"人"</span><span class="token punctuation">,</span>
-        <span class="token property">"subtotal"</span><span class="token operator">:</span> <span class="token number">1080.00</span><span class="token punctuation">,</span>
-        <span class="token property">"availableStock"</span><span class="token operator">:</span> <span class="token number">12</span><span class="token punctuation">,</span>
-        <span class="token property">"canBook"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-        <span class="token property">"minPeople"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-        <span class="token property">"maxPeople"</span><span class="token operator">:</span> <span class="token number">0</span>
-      <span class="token punctuation">}</span>
-    <span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token property">"totalAmount"</span><span class="token operator">:</span> <span class="token number">1160.00</span><span class="token punctuation">,</span>
-    <span class="token property">"cartCount"</span><span class="token operator">:</span> <span class="token number">7</span><span class="token punctuation">,</span>
-    <span class="token property">"contactName"</span><span class="token operator">:</span> <span class="token string">"张三"</span><span class="token punctuation">,</span>
-    <span class="token property">"contactPhone"</span><span class="token operator">:</span> <span class="token string">"13800138000"</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>返回字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>date</td>
-<td>string</td>
-<td>当前选择的日期（默认取第一个 item 的 date）</td>
-</tr>
-<tr>
-<td>canSubmit</td>
-<td>bool</td>
-<td>是否全部项可提交</td>
-</tr>
-<tr>
-<td>items</td>
-<td>array</td>
-<td>购物车明细</td>
-</tr>
-<tr>
-<td>items[].cartId</td>
-<td>int</td>
-<td>购物车项Id</td>
-</tr>
-<tr>
-<td>items[].itemId</td>
-<td>int</td>
-<td>项目Id</td>
-</tr>
-<tr>
-<td>items[].itemName</td>
-<td>string</td>
-<td>项目名</td>
-</tr>
-<tr>
-<td>items[].coverImage</td>
-<td>string</td>
-<td>项目封面图</td>
-</tr>
-<tr>
-<td>items[].date</td>
-<td>string</td>
-<td>预约日期</td>
-</tr>
-<tr>
-<td>items[].quantity</td>
-<td>int</td>
+<td>1</td>
 <td>数量</td>
+<td>1</td>
 </tr>
 <tr>
-<td>items[].unitPrice</td>
-<td>decimal</td>
-<td>当日单价</td>
+<td>companyType</td>
+<td>smallint</td>
+<td>0</td>
+<td>公司类型</td>
+<td>0</td>
 </tr>
 <tr>
-<td>items[].priceUnit</td>
-<td>string</td>
-<td>价格单位</td>
+<td>addTime</td>
+<td>datetime</td>
+<td>GETDATE()</td>
+<td>创建时间</td>
+<td>—</td>
 </tr>
 <tr>
-<td>items[].subtotal</td>
-<td>decimal</td>
-<td>小计</td>
-</tr>
-<tr>
-<td>items[].availableStock</td>
+<td>addUserId</td>
 <td>int</td>
-<td>可售余量</td>
+<td>0</td>
+<td>创建人ID</td>
+<td>—</td>
 </tr>
 <tr>
-<td>items[].canBook</td>
-<td>bool</td>
-<td>当日是否可预约</td>
+<td>updateTime</td>
+<td>datetime</td>
+<td>NULL</td>
+<td>修改时间</td>
+<td>—</td>
 </tr>
 <tr>
-<td>items[].minPeople</td>
+<td>updateUserId</td>
 <td>int</td>
-<td>最低起订人数</td>
-</tr>
-<tr>
-<td>items[].maxPeople</td>
-<td>int</td>
-<td>最高人数（0不限）</td>
-</tr>
-<tr>
-<td>totalAmount</td>
-<td>decimal</td>
-<td>订单总金额</td>
-</tr>
-<tr>
-<td>cartCount</td>
-<td>int</td>
-<td>购物车总数量</td>
-</tr>
-<tr>
-<td>contactName</td>
-<td>string</td>
-<td>联系人姓名（上次订单回填）</td>
-</tr>
-<tr>
-<td>contactPhone</td>
-<td>string</td>
-<td>联系人手机号（上次订单回填）</td>
+<td>NULL</td>
+<td>修改人ID</td>
+<td>—</td>
 </tr>
 </tbody></table>
-<hr>
-<h5 id="createorder-创建订单预占库存">createOrder — 创建订单（预占库存）</h5>
-<h6 id="1接口定义-8">（1）接口定义</h6>
-<table>
-<thead>
-<tr>
-<th>项</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>路径</td>
-<td><code>/api/v1/z_Ty/createOrder</code></td>
-</tr>
-<tr>
-<td>方法</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>鉴权</td>
-<td><code>[UserAuthorize]</code></td>
-</tr>
-<tr>
-<td>参数</td>
-<td><code>ParaTyOrderCreate { string Date; string ContactName; string ContactPhone; int AdultCount; int ChildCount; string Remark; }</code></td>
-</tr>
-</tbody></table>
-<h6 id="2请求-8">（2）请求</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"date"</span><span class="token operator">:</span> <span class="token string">"2026-08-20"</span><span class="token punctuation">,</span>
-  <span class="token property">"contactName"</span><span class="token operator">:</span> <span class="token string">"张三"</span><span class="token punctuation">,</span>
-  <span class="token property">"contactPhone"</span><span class="token operator">:</span> <span class="token string">"13800138000"</span><span class="token punctuation">,</span>
-  <span class="token property">"adultCount"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"childCount"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"remark"</span><span class="token operator">:</span> <span class="token string">"儿童年龄、饮食忌口"</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>请求字段说明</strong>：</p>
+<p><strong>索引</strong>：<code>IX_ty_cart_data_userId (userId)</code></p>
+<h3 id="58-单项体验订单表ty_order_data">5.8 单项体验订单表（ty_order_data）</h3>
 <table>
 <thead>
 <tr>
 <th>字段</th>
 <th>类型</th>
-<th>必填</th>
+<th>默认值</th>
 <th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>date</td>
-<td>string</td>
-<td>是</td>
-<td>预约日期（覆盖购物车所有 item 的 date）</td>
-</tr>
-<tr>
-<td>contactName</td>
-<td>string</td>
-<td>是</td>
-<td>联系人姓名</td>
-</tr>
-<tr>
-<td>contactPhone</td>
-<td>string</td>
-<td>是</td>
-<td>联系人手机号</td>
-</tr>
-<tr>
-<td>adultCount</td>
-<td>int</td>
-<td>是</td>
-<td>成人数（&gt;=1）</td>
-</tr>
-<tr>
-<td>childCount</td>
-<td>int</td>
-<td>否</td>
-<td>儿童数（默认 0）</td>
-</tr>
-<tr>
-<td>remark</td>
-<td>string</td>
-<td>否</td>
-<td>备注</td>
-</tr>
-</tbody></table>
-<p><strong>说明</strong>：不传 <code>cartIds</code>（下单全部购物车）；<strong>不传金额</strong>（后端算）。</p>
-<h6 id="3返回-7">（3）返回</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"tyOrderId"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-    <span class="token property">"orderNo"</span><span class="token operator">:</span> <span class="token string">"MP46063169"</span><span class="token punctuation">,</span>
-    <span class="token property">"date"</span><span class="token operator">:</span> <span class="token string">"2026-08-20"</span><span class="token punctuation">,</span>
-    <span class="token property">"totalAmount"</span><span class="token operator">:</span> <span class="token number">1160.00</span><span class="token punctuation">,</span>
-    <span class="token property">"expireTime"</span><span class="token operator">:</span> <span class="token string">"2026-08-20 10:30:00"</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>返回字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>tyOrderId</td>
-<td>int</td>
-<td>订单Id</td>
+<td>int identity</td>
+<td>—</td>
+<td>主键</td>
+<td>1</td>
 </tr>
 <tr>
 <td>orderNo</td>
-<td>string</td>
-<td>订单号</td>
+<td>varchar(50)</td>
+<td>''</td>
+<td>订单编号</td>
+<td>MP46063169</td>
 </tr>
 <tr>
-<td>date</td>
-<td>string</td>
-<td>预约日期（回显）</td>
+<td>userId</td>
+<td>int</td>
+<td>0</td>
+<td>用户ID</td>
+<td>1001</td>
+</tr>
+<tr>
+<td>contactName</td>
+<td>nvarchar(64)</td>
+<td>''</td>
+<td>联系人姓名</td>
+<td>张三</td>
+</tr>
+<tr>
+<td>contactPhone</td>
+<td>varchar(30)</td>
+<td>''</td>
+<td>联系人手机号</td>
+<td>138xxxx</td>
+</tr>
+<tr>
+<td>adultCount</td>
+<td>int</td>
+<td>0</td>
+<td>成人数</td>
+<td>1</td>
+</tr>
+<tr>
+<td>childCount</td>
+<td>int</td>
+<td>0</td>
+<td>儿童数</td>
+<td>0</td>
 </tr>
 <tr>
 <td>totalAmount</td>
-<td>decimal</td>
-<td>订单总金额（后端算）</td>
+<td>decimal(18,2)</td>
+<td>0</td>
+<td>订单总金额</td>
+<td>1160.00</td>
 </tr>
 <tr>
-<td>expireTime</td>
-<td>string</td>
-<td>预占超时时间（下单后 15 分钟）</td>
-</tr>
-</tbody></table>
-<hr>
-<h5 id="pay-支付预占转已售">pay — 支付（预占转已售）</h5>
-<h6 id="1接口定义-9">（1）接口定义</h6>
-<table>
-<thead>
-<tr>
-<th>项</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>路径</td>
-<td><code>/api/v1/z_Ty/pay</code></td>
+<td>remark</td>
+<td>nvarchar(512)</td>
+<td>''</td>
+<td>备注</td>
+<td>儿童年龄、饮食忌口</td>
 </tr>
 <tr>
-<td>方法</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>鉴权</td>
-<td><code>[UserAuthorize]</code></td>
-</tr>
-<tr>
-<td>参数</td>
-<td><code>ParaTyOrderPay { string OrderNo; string PayWay; }</code></td>
-</tr>
-</tbody></table>
-<h6 id="2请求-9">（2）请求</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"orderNo"</span><span class="token operator">:</span> <span class="token string">"MP46063169"</span><span class="token punctuation">,</span>
-  <span class="token property">"payWay"</span><span class="token operator">:</span> <span class="token string">"微信支付"</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>请求字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>必填</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>orderNo</td>
-<td>string</td>
-<td>是</td>
-<td>订单号</td>
+<td>payStatus</td>
+<td>bit</td>
+<td>0</td>
+<td>支付状态：0未支付 1已支付</td>
+<td>1</td>
 </tr>
 <tr>
 <td>payWay</td>
-<td>string</td>
-<td>是</td>
+<td>nvarchar(20)</td>
+<td>''</td>
 <td>支付方式</td>
-</tr>
-</tbody></table>
-<h6 id="3返回-8">（3）返回</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"success"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    <span class="token property">"orderNo"</span><span class="token operator">:</span> <span class="token string">"MP46063169"</span><span class="token punctuation">,</span>
-    <span class="token property">"payTime"</span><span class="token operator">:</span> <span class="token string">"2026-08-20 10:30:00"</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>返回字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>success</td>
-<td>bool</td>
-<td>是否支付成功（幂等：重复请求也返回 true）</td>
-</tr>
-<tr>
-<td>orderNo</td>
-<td>string</td>
-<td>订单号</td>
-</tr>
-<tr>
-<td>payTime</td>
-<td>string</td>
-<td>支付时间（首次支付时间，幂等时不刷新）</td>
-</tr>
-</tbody></table>
-<hr>
-<h5 id="cancelorder-取消订单释放预占">cancelOrder — 取消订单（释放预占）</h5>
-<h6 id="1接口定义-10">（1）接口定义</h6>
-<table>
-<thead>
-<tr>
-<th>项</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>路径</td>
-<td><code>/api/v1/z_Ty/cancelOrder</code></td>
-</tr>
-<tr>
-<td>方法</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>鉴权</td>
-<td><code>[UserAuthorize]</code></td>
-</tr>
-<tr>
-<td>参数</td>
-<td><code>SingleString</code>（订单号）</td>
-</tr>
-</tbody></table>
-<h6 id="2请求-10">（2）请求</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"orderNo"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"Value"</span><span class="token operator">:</span> <span class="token string">"MP46063169"</span> <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>请求字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>必填</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>orderNo</td>
-<td>object</td>
-<td>是</td>
-<td>订单号，格式 <code>{ "Value": "MP46063169" }</code></td>
-</tr>
-</tbody></table>
-<h6 id="3返回-9">（3）返回</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"success"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    <span class="token property">"orderNo"</span><span class="token operator">:</span> <span class="token string">"MP46063169"</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>返回字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>success</td>
-<td>bool</td>
-<td>是否取消成功</td>
-</tr>
-<tr>
-<td>orderNo</td>
-<td>string</td>
-<td>订单号</td>
-</tr>
-</tbody></table>
-<hr>
-<h5 id="refund-退款两步试算-确认">refund — 退款（两步：试算 + 确认）</h5>
-<h6 id="1接口定义-11">（1）接口定义</h6>
-<table>
-<thead>
-<tr>
-<th>项</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>路径</td>
-<td><code>/api/v1/z_Ty/refund</code></td>
-</tr>
-<tr>
-<td>方法</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>鉴权</td>
-<td><code>[UserAuthorize]</code></td>
-</tr>
-<tr>
-<td>参数</td>
-<td><code>ParaTyOrderRefund { string OrderNo; bool Confirm; }</code></td>
-</tr>
-<tr>
-<td>说明</td>
-<td>两步退款：同一接口，<code>confirm</code> 区分"试算"和"真退款"</td>
-</tr>
-</tbody></table>
-<h6 id="2请求-11">（2）请求</h6>
-<p><strong>第一步（试算/预览）</strong>：</p>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"orderNo"</span><span class="token operator">:</span> <span class="token string">"MP46063169"</span><span class="token punctuation">,</span>
-  <span class="token property">"confirm"</span><span class="token operator">:</span> <span class="token boolean">false</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>第二步（确认退款）</strong>：</p>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"orderNo"</span><span class="token operator">:</span> <span class="token string">"MP46063169"</span><span class="token punctuation">,</span>
-  <span class="token property">"confirm"</span><span class="token operator">:</span> <span class="token boolean">true</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>请求字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>必填</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>orderNo</td>
-<td>string</td>
-<td>是</td>
-<td>订单号</td>
-</tr>
-<tr>
-<td>confirm</td>
-<td>bool</td>
-<td>否</td>
-<td><code>false</code>（默认）=试算；<code>true</code>=执行退款</td>
-</tr>
-</tbody></table>
-<h6 id="3返回-10">（3）返回</h6>
-<p><strong>第一步（试算，<code>confirm=false</code>）</strong>：</p>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"orderNo"</span><span class="token operator">:</span> <span class="token string">"MP46063169"</span><span class="token punctuation">,</span>
-    <span class="token property">"totalAmount"</span><span class="token operator">:</span> <span class="token number">1160.00</span><span class="token punctuation">,</span>
-    <span class="token property">"refundAmount"</span><span class="token operator">:</span> <span class="token number">1020.80</span><span class="token punctuation">,</span>
-    <span class="token property">"refundRatio"</span><span class="token operator">:</span> <span class="token number">88.00</span><span class="token punctuation">,</span>
-    <span class="token property">"refundRuleRemark"</span><span class="token operator">:</span> <span class="token string">"提前10天至5天，退订单总额的88%"</span><span class="token punctuation">,</span>
-    <span class="token property">"orderStatus"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-    <span class="token property">"canRefund"</span><span class="token operator">:</span> <span class="token boolean">true</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>第二步（确认退款，<code>confirm=true</code>）</strong>：</p>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"success"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    <span class="token property">"orderNo"</span><span class="token operator">:</span> <span class="token string">"MP46063169"</span><span class="token punctuation">,</span>
-    <span class="token property">"totalAmount"</span><span class="token operator">:</span> <span class="token number">1160.00</span><span class="token punctuation">,</span>
-    <span class="token property">"refundAmount"</span><span class="token operator">:</span> <span class="token number">1020.80</span><span class="token punctuation">,</span>
-    <span class="token property">"refundRatio"</span><span class="token operator">:</span> <span class="token number">88.00</span><span class="token punctuation">,</span>
-    <span class="token property">"refundRuleRemark"</span><span class="token operator">:</span> <span class="token string">"提前10天至5天，退订单总额的88%"</span><span class="token punctuation">,</span>
-    <span class="token property">"orderStatus"</span><span class="token operator">:</span> <span class="token number">4</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>返回字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>success</td>
-<td>bool</td>
-<td>是否退款成功（<strong>仅 <code>confirm=true</code> 时返回</strong>）</td>
-</tr>
-<tr>
-<td>orderNo</td>
-<td>string</td>
-<td>订单号</td>
-</tr>
-<tr>
-<td>totalAmount</td>
-<td>decimal</td>
-<td>订单总额</td>
-</tr>
-<tr>
-<td>refundAmount</td>
-<td>decimal</td>
-<td>实际退款金额</td>
-</tr>
-<tr>
-<td>refundRatio</td>
-<td>decimal</td>
-<td>退款比例（0–100）</td>
-</tr>
-<tr>
-<td>refundRuleRemark</td>
-<td>string</td>
-<td>命中的退改规则说明</td>
+<td>微信支付</td>
 </tr>
 <tr>
 <td>orderStatus</td>
 <td>int</td>
-<td>退款后订单状态（<code>confirm=true</code> 后 = 4 退款完成）</td>
+<td>0</td>
+<td>订单状态：0待支付 1已支付 2过期未付款 3退款中 4退款完成 5已完成 6已取消</td>
+<td>1</td>
 </tr>
 <tr>
-<td>canRefund</td>
-<td>bool</td>
-<td>是否可退款（<strong>仅 <code>confirm=false</code> 时返回</strong>）</td>
-</tr>
-</tbody></table>
-<h5 id="generateqrcode-生成核销二维码">generateQrcode — 生成核销二维码</h5>
-<h6 id="1接口定义-12">（1）接口定义</h6>
-<table>
-<thead>
-<tr>
-<th>项</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>路径</td>
-<td><code>/api/v1/z_Ty/generateQrcode</code></td>
+<td>payTime</td>
+<td>datetime</td>
+<td>NULL</td>
+<td>支付时间</td>
+<td>—</td>
 </tr>
 <tr>
-<td>方法</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>鉴权</td>
-<td><code>[UserAuthorize]</code></td>
-</tr>
-<tr>
-<td>参数</td>
-<td><code>SingleString</code>（订单号）</td>
-</tr>
-</tbody></table>
-<h6 id="2请求-12">（2）请求</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"orderNo"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"Value"</span><span class="token operator">:</span> <span class="token string">"MP46063169"</span> <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>请求字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>必填</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>orderNo</td>
-<td>object</td>
-<td>是</td>
-<td>订单号，格式 <code>{ "Value": "MP46063169" }</code></td>
-</tr>
-</tbody></table>
-<h6 id="3返回-11">（3）返回</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"qrcode"</span><span class="token operator">:</span> <span class="token string">"A3K9M2X7B1"</span><span class="token punctuation">,</span>
-    <span class="token property">"expireTime"</span><span class="token operator">:</span> <span class="token string">"2026-08-20 10:40:00"</span><span class="token punctuation">,</span>
-    <span class="token property">"orderNo"</span><span class="token operator">:</span> <span class="token string">"MP46063169"</span><span class="token punctuation">,</span>
-    <span class="token property">"date"</span><span class="token operator">:</span> <span class="token string">"2026-08-20"</span><span class="token punctuation">,</span>
-    <span class="token property">"totalAmount"</span><span class="token operator">:</span> <span class="token number">1160.00</span><span class="token punctuation">,</span>
-    <span class="token property">"items"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token punctuation">{</span> <span class="token property">"itemName"</span><span class="token operator">:</span> <span class="token string">"茶禾定制家宴"</span><span class="token punctuation">,</span> <span class="token property">"quantity"</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"itemName"</span><span class="token operator">:</span> <span class="token string">"芦笙百家宴"</span><span class="token punctuation">,</span> <span class="token property">"quantity"</span><span class="token operator">:</span> <span class="token number">6</span> <span class="token punctuation">}</span>
-    <span class="token punctuation">]</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>返回字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>qrcode</td>
-<td>string</td>
-<td>10 位核销码</td>
+<td>checkinTime</td>
+<td>datetime</td>
+<td>NULL</td>
+<td>核销时间</td>
+<td>—</td>
 </tr>
 <tr>
 <td>expireTime</td>
-<td>string</td>
-<td>失效时间（生成时间 + 10 分钟）</td>
+<td>datetime</td>
+<td>—</td>
+<td>预占超时时间</td>
+<td>2026-08-20 10:30:00</td>
 </tr>
 <tr>
-<td>orderNo</td>
-<td>string</td>
-<td>订单号</td>
+<td>companyType</td>
+<td>smallint</td>
+<td>0</td>
+<td>公司类型</td>
+<td>0</td>
 </tr>
 <tr>
-<td>date</td>
-<td>string</td>
-<td>体验日期（取订单明细的最早 date）</td>
+<td>addTime</td>
+<td>datetime</td>
+<td>GETDATE()</td>
+<td>创建时间</td>
+<td>—</td>
 </tr>
 <tr>
-<td>totalAmount</td>
-<td>decimal</td>
-<td>订单总额</td>
-</tr>
-<tr>
-<td>items</td>
-<td>array</td>
-<td>订单明细（成功页展示）</td>
-</tr>
-<tr>
-<td>items[].itemName</td>
-<td>string</td>
-<td>项目名</td>
-</tr>
-<tr>
-<td>items[].quantity</td>
+<td>addUserId</td>
 <td>int</td>
-<td>数量</td>
+<td>0</td>
+<td>创建人ID</td>
+<td>—</td>
+</tr>
+<tr>
+<td>updateTime</td>
+<td>datetime</td>
+<td>NULL</td>
+<td>修改时间</td>
+<td>—</td>
+</tr>
+<tr>
+<td>updateUserId</td>
+<td>int</td>
+<td>NULL</td>
+<td>修改人ID</td>
+<td>—</td>
 </tr>
 </tbody></table>
-<hr>
-<h5 id="verify-工作人员核销">verify — 工作人员核销</h5>
-<h6 id="1接口定义-13">（1）接口定义</h6>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>项</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td>路径</td>
-<td><code>/api/v1/z_Ty/verify</code></td>
-</tr>
-<tr>
-<td></td>
-<td>方法</td>
-<td>POST</td>
-</tr>
-<tr>
-<td></td>
-<td>鉴权</td>
-<td><code>[UserAuthorize]</code>（<strong>暂不做角色判断</strong>，C11 待定）</td>
-</tr>
-<tr>
-<td></td>
-<td>参数</td>
-<td><code>ParaTyQrcodeVerify { string Qrcode; bool Confirm; }</code></td>
-</tr>
-<tr>
-<td></td>
-<td>说明</td>
-<td>两步核销：同一接口，<code>confirm</code> 区分"预校验"和"真核销"</td>
-</tr>
-</tbody></table>
-<h6 id="2请求-13">（2）请求</h6>
-<p><strong>第一步（扫码后，只校验 + 拿明细）</strong>：</p>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"qrcode"</span><span class="token operator">:</span> <span class="token string">"A3K9M2X7B1"</span><span class="token punctuation">,</span>
-  <span class="token property">"confirm"</span><span class="token operator">:</span> <span class="token boolean">false</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>第二步（工作人员确认后，真核销）</strong>：</p>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"qrcode"</span><span class="token operator">:</span> <span class="token string">"A3K9M2X7B1"</span><span class="token punctuation">,</span>
-  <span class="token property">"confirm"</span><span class="token operator">:</span> <span class="token boolean">true</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>请求字段说明</strong>：</p>
+<p><strong>索引</strong>：<code>IX_ty_order_data_orderNo (orderNo)</code>、<code>IX_ty_order_data_userId (userId)</code></p>
+<h3 id="59-单项体验订单明细表ty_order_item_data">5.9 单项体验订单明细表（ty_order_item_data）</h3>
 <table>
 <thead>
 <tr>
 <th>字段</th>
 <th>类型</th>
-<th>必填</th>
+<th>默认值</th>
 <th>说明</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
+<td>tyOrderItemId</td>
+<td>int identity</td>
+<td>—</td>
+<td>主键</td>
+<td>1</td>
+</tr>
+<tr>
+<td>tyOrderId</td>
+<td>int</td>
+<td>0</td>
+<td>订单ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td>tyItemId</td>
+<td>int</td>
+<td>0</td>
+<td>项目ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td>itemName</td>
+<td>nvarchar(128)</td>
+<td>''</td>
+<td>项目名称（下单快照，不随主表改名联动）</td>
+<td>茶禾定制家宴</td>
+</tr>
+<tr>
+<td>date</td>
+<td>date</td>
+<td>—</td>
+<td>预约日期</td>
+<td>2026-08-20</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>int</td>
+<td>0</td>
+<td>数量</td>
+<td>1</td>
+</tr>
+<tr>
+<td>unitPrice</td>
+<td>decimal(18,3)</td>
+<td>0</td>
+<td>下单单价快照</td>
+<td>80.000</td>
+</tr>
+<tr>
+<td>addTime</td>
+<td>datetime</td>
+<td>GETDATE()</td>
+<td>创建时间</td>
+<td>—</td>
+</tr>
+<tr>
+<td>addUserId</td>
+<td>int</td>
+<td>0</td>
+<td>创建人ID</td>
+<td>—</td>
+</tr>
+<tr>
+<td>updateTime</td>
+<td>datetime</td>
+<td>NULL</td>
+<td>修改时间</td>
+<td>—</td>
+</tr>
+<tr>
+<td>updateUserId</td>
+<td>int</td>
+<td>NULL</td>
+<td>修改人ID</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<p><strong>索引</strong>：<code>IX_ty_order_item_data_tyOrderId (tyOrderId)</code></p>
+<h3 id="510-单项体验服务二维码表ty_qrcode_data">5.10 单项体验服务二维码表（ty_qrcode_data）</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>可空否</th>
+<th>默认值</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>tyQrcodeId</td>
+<td>int identity</td>
+<td>N</td>
+<td>—</td>
+<td>本表主键Id，自增1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>tyOrderId</td>
+<td>int</td>
+<td>N</td>
+<td>0</td>
+<td>体验订单的主键Id</td>
+<td>1</td>
+</tr>
+<tr>
 <td>qrcode</td>
-<td>string</td>
-<td>是</td>
-<td>10 位核销码</td>
+<td>varchar(10)</td>
+<td>N</td>
+<td>''</td>
+<td>10位随机码</td>
+<td>A3K9M2X7B1</td>
 </tr>
 <tr>
-<td>confirm</td>
-<td>bool</td>
-<td>否</td>
-<td><code>false</code>（默认）=只校验；<code>true</code>=执行核销</td>
+<td>addTime</td>
+<td>datetime</td>
+<td>N</td>
+<td>GETDATE()</td>
+<td>产生时间</td>
+<td>—</td>
+</tr>
+<tr>
+<td>expireTime</td>
+<td>datetime</td>
+<td>N</td>
+<td>—</td>
+<td>失效时间</td>
+<td>—</td>
+</tr>
+<tr>
+<td>isUsed</td>
+<td>bit</td>
+<td>N</td>
+<td>0</td>
+<td>是否已使用/作废</td>
+<td>0</td>
+</tr>
+<tr>
+<td>useTime</td>
+<td>datetime</td>
+<td>Y</td>
+<td>NULL</td>
+<td>核销时间</td>
+<td>—</td>
 </tr>
 </tbody></table>
-<h6 id="3返回-12">（3）返回</h6>
-<pre><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"resultType"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"orderNo"</span><span class="token operator">:</span> <span class="token string">"MP46063169"</span><span class="token punctuation">,</span>
-    <span class="token property">"date"</span><span class="token operator">:</span> <span class="token string">"2026-08-20"</span><span class="token punctuation">,</span>
-    <span class="token property">"contactName"</span><span class="token operator">:</span> <span class="token string">"张三"</span><span class="token punctuation">,</span>
-    <span class="token property">"contactPhone"</span><span class="token operator">:</span> <span class="token string">"13800138000"</span><span class="token punctuation">,</span>
-    <span class="token property">"items"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token punctuation">{</span> <span class="token property">"itemName"</span><span class="token operator">:</span> <span class="token string">"茶禾定制家宴"</span><span class="token punctuation">,</span> <span class="token property">"quantity"</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> <span class="token property">"itemName"</span><span class="token operator">:</span> <span class="token string">"芦笙百家宴"</span><span class="token punctuation">,</span> <span class="token property">"quantity"</span><span class="token operator">:</span> <span class="token number">6</span> <span class="token punctuation">}</span>
-    <span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token property">"verified"</span><span class="token operator">:</span> <span class="token boolean">false</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre><p><strong>返回字段说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>orderNo</td>
-<td>string</td>
-<td>订单号</td>
-</tr>
-<tr>
-<td>date</td>
-<td>string</td>
-<td>体验日期</td>
-</tr>
-<tr>
-<td>contactName</td>
-<td>string</td>
-<td>联系人姓名（工作人员核对用）</td>
-</tr>
-<tr>
-<td>contactPhone</td>
-<td>string</td>
-<td>联系人手机号（工作人员核对用）</td>
-</tr>
-<tr>
-<td>items</td>
-<td>array</td>
-<td>订单明细（供工作人员核对）</td>
-</tr>
-<tr>
-<td>items[].itemName</td>
-<td>string</td>
-<td>项目名</td>
-</tr>
-<tr>
-<td>items[].quantity</td>
-<td>int</td>
-<td>数量</td>
-</tr>
-<tr>
-<td>verified</td>
-<td>bool</td>
-<td>是否已核销（<code>confirm=false</code> 恒 <code>false</code>；<code>confirm=true</code> 返回 <code>true</code>）</td>
-</tr>
-</tbody></table>
+<p><strong>唯一索引（防止碰撞）</strong>：<code>UX_ty_qrcode_data_qrcode (qrcode)</code><br><strong>订单查询索引</strong>：<code>IX_ty_qrcode_data_tyOrderId (tyOrderId)</code></p>
+<p><strong>说明</strong>：</p>
+<ul>
+<li><code>qrcode</code> 为 10 位随机码，加唯一索引防止碰撞</li>
+<li>每次进入核销页生成新码，同订单旧码立即置 <code>isUsed = 1</code></li>
+<li><code>expireTime</code> 为 <code>addTime + 10 分钟</code></li>
+</ul>
 </article>
 </body>
 </html>
