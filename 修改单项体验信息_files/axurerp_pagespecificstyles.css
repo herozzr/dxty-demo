@@ -31,7 +31,7 @@ div {
     left:0px;
     top:0px;
     width:674px;
-    height:369px;
+    height:483px;
 }
 
 #u0_img {
@@ -39,13 +39,13 @@ div {
     left:-3px;
     top:-3px;
     width:680px;
-    height:375px;
+    height:489px;
 }
 
 .u1 {
     position:absolute;
     left:2px;
-    top:176px;
+    top:234px;
     width:670px;
     height:16px;
     ;
@@ -337,9 +337,9 @@ div {
 .u18 {
     position:absolute;
     left:197px;
-    top:328px;
+    top:429px;
     width:64px;
-    height:25px;
+    height:33px;
     ;
     ;
     text-align: center;;
@@ -355,9 +355,9 @@ div {
 .u19 {
     position:absolute;
     left:285px;
-    top:328px;
+    top:429px;
     width:64px;
-    height:25px;
+    height:33px;
     ;
     ;
     text-align: center;;
@@ -373,7 +373,7 @@ div {
 .u20 {
     position:absolute;
     left:16px;
-    top:281px;
+    top:368px;
     width:150px;
     height:16px;
     ;
@@ -387,9 +387,9 @@ div {
 .u21 {
     position:absolute;
     left:197px;
-    top:276px;
+    top:361px;
     width:180px;
-    height:25px;
+    height:33px;
     ;
     ;
     text-align: left;;
@@ -417,7 +417,92 @@ div {
 .u22 {
     position:absolute;
     left:0px;
-    top:307px;
+    top:402px;
+    width:674px;
+    height:10px;
+    
+}
+
+.u23 {
+    position:absolute;
+    left:16px;
+    top:297px;
+    width:150px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u24 {
+    position:absolute;
+    left:197px;
+    top:276px;
+    width:100px;
+    height:25px;
+    ;
+    ;
+    text-align: center;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u25 {
+    position:absolute;
+    left:197px;
+    top:311px;
+    width:57px;
+    height:25px;
+    ;
+    ;
+    text-align: center;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u26 {
+    position:absolute;
+    left:307px;
+    top:281px;
+    width:150px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u27_line {
+    background-image: url('../修改单项体验信息_files/u27_line.png');
+}
+
+.u27_line {
+    position:absolute;
+    left:0px;
+    top:4px;
+    width:674px;
+    height:3px;
+}
+
+.u27 {
+    position:absolute;
+    left:0px;
+    top:346px;
     width:674px;
     height:10px;
     

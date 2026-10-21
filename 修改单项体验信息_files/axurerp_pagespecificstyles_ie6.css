@@ -33,3 +33,8 @@
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="修改单项体验信息_files/u22_line.png");
 }
 
+* html .u27_line {
+    background-image: none;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="修改单项体验信息_files/u27_line.png");
+}
+

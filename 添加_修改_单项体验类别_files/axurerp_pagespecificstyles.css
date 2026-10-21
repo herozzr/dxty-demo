@@ -31,7 +31,7 @@ div {
     left:0px;
     top:0px;
     width:674px;
-    height:130px;
+    height:158px;
 }
 
 #u0_img {
@@ -39,13 +39,13 @@ div {
     left:-3px;
     top:-3px;
     width:680px;
-    height:136px;
+    height:164px;
 }
 
 .u1 {
     position:absolute;
     left:2px;
-    top:57px;
+    top:71px;
     width:670px;
     height:16px;
     ;
@@ -92,8 +92,8 @@ div {
 
 .u4 {
     position:absolute;
-    left:197px;
-    top:34px;
+    left:196px;
+    top:80px;
     width:315px;
     height:25px;
     ;
@@ -110,8 +110,8 @@ div {
 
 .u5 {
     position:absolute;
-    left:16px;
-    top:38px;
+    left:15px;
+    top:84px;
     width:150px;
     height:16px;
     ;
@@ -137,7 +137,7 @@ div {
 .u6 {
     position:absolute;
     left:0px;
-    top:69px;
+    top:109px;
     width:674px;
     height:10px;
     
@@ -146,7 +146,7 @@ div {
 .u7 {
     position:absolute;
     left:197px;
-    top:89px;
+    top:123px;
     width:64px;
     height:25px;
     ;
@@ -164,7 +164,7 @@ div {
 .u8 {
     position:absolute;
     left:285px;
-    top:89px;
+    top:123px;
     width:64px;
     height:25px;
     ;
@@ -176,6 +176,59 @@ div {
     font-style:normal;
     font-weight:normal;
     text-decoration:none;
+    
+}
+
+.u9 {
+    position:absolute;
+    left:15px;
+    top:37px;
+    width:150px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u10 {
+    position:absolute;
+    left:196px;
+    top:34px;
+    width:180px;
+    height:22px;
+    ;
+    ;
+    ;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u11_line {
+    background-image: url('../添加_修改_单项体验类别_files/u11_line.png');
+}
+
+.u11_line {
+    position:absolute;
+    left:0px;
+    top:4px;
+    width:674px;
+    height:3px;
+}
+
+.u11 {
+    position:absolute;
+    left:0px;
+    top:65px;
+    width:674px;
+    height:10px;
     
 }
 
